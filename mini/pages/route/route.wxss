@@ -1,0 +1,34 @@
+.form { margin: 0 24rpx; background: #FFFDF7; border-radius: 18rpx; overflow: hidden; box-shadow: 0 6rpx 18rpx rgba(90,60,30,.06); }
+.picker { display: flex; align-items: center; padding: 26rpx 24rpx; border-bottom: 1rpx solid #F2EADB; }
+.picker:last-child { border-bottom: none; }
+.picker .lb { font-size: 23rpx; color: #8A7A63; width: 80rpx; }
+.picker .val { flex: 1; font-size: 25rpx; font-weight: 600; }
+.picker .arw { color: #B9AC97; font-size: 30rpx; }
+.gen {
+  margin: 24rpx; background: linear-gradient(135deg, #8E2A1F, #B93A2B);
+  color: #FBF3E4; font-size: 27rpx; font-weight: 600;
+  border-radius: 999rpx; height: 84rpx; line-height: 84rpx;
+  box-shadow: 0 8rpx 20rpx rgba(142,42,31,.22);
+}
+.gen::after { border: none; }
+.route { margin: 0 24rpx; background: #FFFDF7; border-radius: 20rpx; padding: 24rpx 22rpx 10rpx; box-shadow: 0 6rpx 18rpx rgba(90,60,30,.06); }
+.rt-title { font-size: 27rpx; font-weight: 700; color: #8E2A1F; letter-spacing: 1rpx; margin-bottom: 18rpx; }
+.stop { display: flex; }
+.dot-line { width: 34rpx; display: flex; flex-direction: column; align-items: center; }
+.dot-line .dot { width: 16rpx; height: 16rpx; border-radius: 50%; background: #C9A254; margin-top: 10rpx; }
+.dot-line .line { flex: 1; width: 2rpx; background: #EBE1CC; margin: 6rpx 0; }
+.stop-body { flex: 1; padding-bottom: 24rpx; }
+.stop-body .h5 { font-size: 25rpx; font-weight: 700; }
+.stop-body .p { font-size: 21rpx; color: #7B7266; line-height: 1.65; margin-top: 6rpx; }
+.stop-body .t { font-size: 20rpx; color: #A5813B; margin-top: 8rpx; }
+.tip { margin: 22rpx 24rpx; background: #EFF5F3; border-radius: 16rpx; padding: 18rpx 22rpx; font-size: 20rpx; color: #2F6E63; line-height: 1.7; }
+
+/* 补齐新版模板需要的小样式 */
+.rt-sub { font-size: 21rpx; color: #A5813B; margin: -10rpx 0 12rpx; }
+.rt-intro { font-size: 22rpx; color: #6B6156; line-height: 1.8; padding-bottom: 18rpx; border-bottom: 1rpx dashed #EDE3D0; margin-bottom: 18rpx; }
+.stop-body .dur { font-size: 19rpx; color: #A79C8C; font-weight: 400; margin-left: 10rpx; }
+.alt { margin-top: 6rpx; padding-top: 16rpx; border-top: 1rpx dashed #EDE3D0; }
+.alt-t { font-size: 20rpx; color: #A79C8C; margin-bottom: 10rpx; }
+.alt-i { font-size: 23rpx; color: #2F6E63; padding: 14rpx 0; border-bottom: 1rpx solid #F4ECDC; }
+.alt-i:last-child { border-bottom: none; }
+.alt-h { font-size: 19rpx; color: #A79C8C; margin-left: 10rpx; }

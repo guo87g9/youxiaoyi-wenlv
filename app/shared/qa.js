@@ -34,7 +34,10 @@
     ["有什么玩的", "玩什么"], ["有啥玩的", "玩什么"], ["有啥玩", "玩什么"],
     ["有什么看", "玩什么"], ["有啥看", "玩什么"], ["有什么可看", "玩什么"],
     ["有什么逛", "玩什么"], ["有啥逛", "玩什么"], ["逛什么", "玩什么"],
-    ["有什么", "玩什么"], ["有啥", "玩什么"],
+    // 注意：不要放 ["有什么","玩什么"]。
+    // "有什么" 在中文里是通用疑问壳，不专指"玩"——
+    // 「有什么特产」会被改写成「玩什么特产」，直接答错类目。
+    // 无宾语的裸「有什么」由 normalize 末尾的 CATCHALL 统一处理。
     // 时间
     ["几点钟", "几点"], ["什么时候", "几点"], ["啥时候", "几点"],
     ["多长时间", "多久"], ["多少时间", "多久"], ["要多久", "多久"],
@@ -73,6 +76,9 @@
     s = s.replace(FILLERS, "");
     s = s.replace(/[的了]+$/g, "");
     s = s.replace(/(.)\1{2,}/g, "$1"); // 「好好好好」→「好」
+    // 裸「有什么/有啥」收尾（后面没有宾语）才当「玩什么」；
+    // 带宾语的「有什么特产」必须保留原词，否则会串到错误的类目上。
+    s = s.replace(/(有什么|有啥|有什么可以|有啥可以|有什么能)$/, "玩什么");
     return s;
   }
 
@@ -143,6 +149,25 @@
     });
     intentList.sort(function (a, b) { return b.term.length - a.term.length; });
 
+    /* ---- 判断一个意图词是不是"内容词" ----
+     * 纯疑问格式（怎么去 / 多少钱 / 几点）挖掉没问题，它们没有信息量。
+     * 但「鸭蛋」「停车」「特产」这种既是意图线索、又是用户实际想查的对象，
+     * 整段挖掉会把问句的内容一起吃掉。判定方式：
+     *   ① 命中了实体表 → 一定是内容词
+     *   ② 含数字/英数 → 保留
+     *   ③ 长度 ≥3 且不含疑问字形（怎/哪/多/几/吗/什/啥/么/钱/费/价）→ 内容词
+     * 剩下的短疑问壳照旧挖掉。 */
+    var QCHAR = /[怎哪几吗什啥么钱费价多少久么]/;
+    function isContentTerm(term) {
+      if (!term) return false;
+      for (var i = 0; i < entityList.length; i++) {
+        if (entityList[i].term.length >= 2 && term.indexOf(entityList[i].term) >= 0) return true;
+      }
+      if (/[0-9a-z]/.test(term)) return true;
+      if (term.length >= 3 && !QCHAR.test(term)) return true;
+      return false;
+    }
+
     /* ---- 归一化后的语料 ---- */
     var corpus = kbAll.map(function (it, i) {
       var nq = (it.q || []).map(normalize);
@@ -198,12 +223,19 @@
 
       var intents = [];
       var rest2 = rest;
+      // 已经作为实体挖掉的位置会变成 \u0000，这里的匹配天然不会命中它。
+      // 但意图词常常"顺带"是个内容词（「鸭蛋」在 food 意图表里，
+      // 可它也是用户真正想问的东西）。把这种词整段挖掉，
+      // 会把「高邮咸鸭蛋为什么好」变成「高邮咸为什么好」，
+      // 于是真正的「咸鸭蛋为什么出名」条目永远匹配不上。
+      // 规则：词里含实体/数值/专名成分的，只登记意图，不挖词。
       for (var k = 0; k < intentList.length; k++) {
         var it = intentList[k];
         if (it.term.length < 2) continue;
         var q = rest2.indexOf(it.term);
         if (q < 0) continue;
         if (intents.indexOf(it.intent) < 0) intents.push(it.intent);
+        if (isContentTerm(it.term)) continue; // 内容词保留在句子里
         rest2 = rest2.slice(0, q) + "\u0000".repeat(it.term.length) + rest2.slice(q + it.term.length);
       }
       rest2 = rest2.replace(/\u0000/g, "");
@@ -280,6 +312,21 @@
         s += kw * 2.5;
         dbg.kw = Math.round(kw * 100) / 100;
 
+        /* --- ③b 问法互相包含：用户说的比条目问法短，但意思就是这条 ---
+         * 「自驾停车」vs 条目的「停车」：kw 只有 0.33（bigram 分母按用户问句算，
+         * 一个"停车"占不满），可比不上那些问法宽、只蹭到 intent 的泛条目。
+         * 所以单独给"我的问法里有你整条问法"这种真包含关系加分。 */
+        var covQ = 0;
+        for (var b0 = 0; b0 < c.nq.length; b0++) {
+          var t0 = c.nq[b0];
+          if (t0 && t0.length >= 2 && qNorm.indexOf(t0) >= 0) {
+            var r0 = t0.length / qNorm.length;
+            if (r0 > covQ) covQ = r0;
+          }
+        }
+        s += covQ * 3.0;
+        if (covQ > 0) dbg.covQ = Math.round(covQ * 100) / 100;
+
         /* --- ④ 字符召回（兜底，防止短问法完全打不中） --- */
         var rec = 0;
         if (c.nqAll && qNorm.length >= 2) {
@@ -294,9 +341,15 @@
 
         /* --- ⑤ 完整问法直接命中：最高优先级 --- */
         for (var n = 0; n < c.nq.length; n++) {
-          if (c.nq[n] && (c.nq[n] === qNorm || qNorm.indexOf(c.nq[n]) >= 0 && c.nq[n].length >= 4)) {
+          var nqc = c.nq[n];
+          if (!nqc) continue;
+          // "整句命中"必须真的占住问句的大部分。
+          // 否则「抗战馆里面有什么」会被「王氏纪念馆」条的「里面有什么」
+          // 以 8 分的全额奖励截胡——那只是碰巧共享了一个通用短壳。
+          if (nqc === qNorm || (qNorm.indexOf(nqc) >= 0 && nqc.length >= 4 &&
+              nqc.length / qNorm.length >= 0.6)) {
             s += 8;
-            dbg.exact = c.nq[n];
+            dbg.exact = nqc;
             break;
           }
         }
@@ -333,7 +386,8 @@
           for (var n4 = 0; n4 < c.nq.length; n4++) {
             if (c.nq[n4] && qNorm.indexOf(c.nq[n4]) >= 0) { inQ = true; break; }
           }
-          if (inQ) {
+          // 同 ⑤：短壳被长问句包含不算数，避免通用问法到处蹭分
+          if (inQ && minLen / qNorm.length >= 0.5) {
             s += 2.5;
             dbg.inQ = 1;
           }

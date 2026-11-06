@@ -1,0 +1,48 @@
+<view class="wrap">
+  <view class="hero">
+    <view class="seal">邮驿</view>
+    <view class="hero-title">邮小驿</view>
+    <view class="hero-sub">AI 邮驿智慧导游 · 一码游高邮</view>
+    <view class="hero-sub">全国规模最大明代驿站 —— 盂城驿 IP 官方搭档</view>
+    <view class="slogan">📣 今日运河西堤“湖上升明月”夜游 19:30 开演</view>
+  </view>
+
+  <view class="quick">
+    <view class="q" bindtap="goTab" data-url="/pages/guide/guide">
+      <view class="ico">🗣️</view><text>AI 讲解</text>
+    </view>
+    <view class="q" bindtap="goTab" data-url="/pages/route/route">
+      <view class="ico">🗺️</view><text>智能路线</text>
+    </view>
+    <view class="q" bindtap="goTab" data-url="/pages/passport/passport">
+      <view class="ico">📮</view><text>集邮护照</text>
+    </view>
+    <view class="q" bindtap="goTab" data-url="/pages/faq/faq">
+      <view class="ico">💬</view><text>文旅问答</text>
+    </view>
+  </view>
+
+  <view class="notice">
+    <view>🚶 城区景点“串珠成链”：盂城驿 → 南门大街 → 镇国寺 → 运河西堤，步行 + 接驳车均可到达</view>
+    <view>🏺 历史古迹 · 文博场馆 · 自然生态 · 街区美食，四类共 {{total}} 处，点下方类别筛选</view>
+  </view>
+
+  <view class="sec-title">全部景点 · 按类别筛选</view>
+
+  <scroll-view class="cat-bar" scroll-x>
+    <view wx:for="{{cats}}" wx:key="k" class="cat-chip {{cat===item.k?'on':''}}" bindtap="onCat" data-k="{{item.k}}">{{item.t}}</view>
+  </scroll-view>
+
+  <view class="card" wx:for="{{spots}}" wx:key="id">
+    <view class="pic" style="background:{{item.bg}}">{{item.icon}}</view>
+    <view class="info">
+      <view class="tag {{item.cat}}">{{item.ticket || item.hours}}</view>
+      <view class="h4" bindtap="onSpot" data-name="{{item.name}}">{{item.name}}</view>
+      <view class="p1">{{item.desc}}</view>
+      <view class="p2">{{item.hours}} · 讲解员 {{item.personaName}}</view>
+    </view>
+    <button class="go" bindtap="onGuide" data-persona="{{item.persona}}">听讲解</button>
+  </view>
+
+  <view style="height:20rpx"></view>
+</view>

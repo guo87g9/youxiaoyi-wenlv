@@ -1,0 +1,18 @@
+{
+  "description": "邮小驿 · AI 邮驿智慧导游（运河数谷 AI OPC 大赛 · 赛道二）",
+  "miniprogramRoot": "./",
+  "compileType": "miniprogram",
+  "libVersion": "3.5.5",
+  "appid": "touristappid",
+  "projectname": "youxiaoyi",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "ignoreDevUnusedFiles": false
+  },
+  "packOptions": { "ignore": [], "include": [] },
+  "condition": {}
+}

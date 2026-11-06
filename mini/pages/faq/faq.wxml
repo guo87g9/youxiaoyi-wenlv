@@ -1,0 +1,57 @@
+<view class="wrap">
+
+  <!-- 检索框：本地引擎，说人话就查 -->
+  <view class="ask-box">
+    <view class="ask-row">
+      <input class="ask-input" value="{{input}}" placeholder="问一句，比如「盂城驿值得去吗」"
+             confirm-type="search" bindinput="onInput" bindconfirm="onSend" />
+      <view class="ask-btn {{asking?'off':''}}" bindtap="onSend">问</view>
+    </view>
+    <scroll-view class="hot" scroll-x wx:if="{{!ans}}">
+      <view class="hot-i" wx:for="{{hot}}" wx:key="*this" bindtap="onHot" data-q="{{item}}">{{item}}</view>
+    </scroll-view>
+  </view>
+
+  <!-- 回答区 -->
+  <block wx:if="{{ans}}">
+    <view class="acard">
+      <view class="me">{{ans.q}}</view>
+      <view class="ai {{ans.ok?'':'miss'}}">{{ans.a}}</view>
+      <view class="src" wx:if="{{ans.src}}" bindtap="copySrc" data-src="{{ans.src}}">出处 · {{ans.src}}（点击复制）</view>
+      <view class="more" wx:if="{{!ans.ok}}">
+        <view class="more-i" wx:for="{{ans.more}}" wx:key="*this" bindtap="onMore" data-q="{{item}}">{{item}}</view>
+      </view>
+      <view class="back" bindtap="backToList">← 回到问题列表</view>
+    </view>
+
+    <block wx:if="{{hist.length > 1}}">
+      <view class="hist-t">刚才问过</view>
+      <view class="hist" wx:for="{{hist}}" wx:key="q" wx:if="{{index > 0}}">
+        <view class="hist-q">{{item.q}}</view>
+        <view class="hist-a">{{item.a}}</view>
+      </view>
+    </block>
+  </block>
+
+  <!-- 列表浏览 -->
+  <block wx:else>
+    <scroll-view class="cats" scroll-x>
+      <view wx:for="{{cats}}" wx:key="k" class="cat {{cat===item.k?'on':''}}"
+            bindtap="onCat" data-k="{{item.k}}">{{item.t}}</view>
+    </scroll-view>
+
+    <view class="faq {{open===index?'open':''}}" wx:for="{{list}}" wx:key="id"
+          bindtap="toggle" data-i="{{index}}">
+      <view class="q">
+        <text class="q-t">{{item.q}}</text>
+        <text class="q-arw">›</text>
+      </view>
+      <view class="a" wx:if="{{open===index}}">
+        <view>{{item.a}}</view>
+        <view class="src-in" wx:if="{{item.src}}">出处 · {{item.src}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="btm-tip">全部答案来自本地文旅知识库（201 条，带出处），检索在手机本地完成，不上传问句。</view>
+</view>

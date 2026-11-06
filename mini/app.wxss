@@ -1,0 +1,76 @@
+page {
+  background: #F7F1E4;
+  color: #2B2B2B;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.wrap { padding-bottom: 30rpx; }
+.hero {
+  background: linear-gradient(150deg, #8E2A1F 0%, #B93A2B 100%);
+  padding: 52rpx 40rpx 46rpx;
+  color: #FBF3E4;
+  position: relative;
+  overflow: hidden;
+  border-bottom-left-radius: 36rpx;
+  border-bottom-right-radius: 36rpx;
+}
+.hero .seal {
+  position: absolute; right: 34rpx; top: 34rpx;
+  width: 92rpx; height: 92rpx;
+  border: 3rpx solid rgba(251,243,228,.65);
+  border-radius: 12rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24rpx; letter-spacing: 6rpx; color: #FBF3E4;
+  writing-mode: vertical-rl;
+}
+.hero-title { font-size: 54rpx; font-weight: 700; letter-spacing: 8rpx; }
+.hero-sub { font-size: 23rpx; line-height: 1.75; margin-top: 14rpx; opacity: .92; }
+.slogan {
+  margin-top: 22rpx; display: inline-block;
+  background: rgba(255,255,255,.16);
+  border: 1rpx solid rgba(251,243,228,.35);
+  border-radius: 999rpx; padding: 10rpx 22rpx; font-size: 21rpx;
+}
+.quick {
+  display: flex; margin: -26rpx 24rpx 0;
+  background: #FFFDF7; border-radius: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(90,60,30,.08);
+  padding: 20rpx 0;
+}
+.quick .q { flex: 1; text-align: center; }
+.quick .q .ico { font-size: 38rpx; }
+.quick .q text { display: block; font-size: 21rpx; margin-top: 6rpx; color: #6B6156; }
+.notice {
+  margin: 20rpx 24rpx; background: #FFF6E8;
+  border: 1rpx solid #F0DDB6; border-radius: 16rpx;
+  padding: 18rpx 22rpx; font-size: 21rpx; color: #8A6A1F; line-height: 1.8;
+}
+.sec-title {
+  margin: 30rpx 24rpx 8rpx; font-size: 30rpx; font-weight: 700;
+  letter-spacing: 2rpx; color: #8E2A1F;
+  display: flex; align-items: center;
+}
+.sec-title::before {
+  content: ""; width: 8rpx; height: 28rpx;
+  background: #C9A254; border-radius: 4rpx; margin-right: 12rpx;
+}
+.card {
+  display: flex; align-items: center;
+  background: #FFFDF7; border-radius: 18rpx;
+  margin: 14rpx 24rpx; padding: 18rpx;
+  box-shadow: 0 6rpx 18rpx rgba(90,60,30,.06);
+}
+.card .pic {
+  width: 100rpx; height: 100rpx; border-radius: 16rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42rpx; color: #fff; flex-shrink: 0;
+}
+.card .info { flex: 1; padding: 0 16rpx; overflow: hidden; }
+.card .h4 { font-size: 27rpx; font-weight: 700; }
+.card .p1 { font-size: 21rpx; color: #7B7266; line-height: 1.6; margin-top: 6rpx; }
+.card .p2 { font-size: 20rpx; color: #A5813B; margin-top: 6rpx; }
+.go {
+  background: #8E2A1F; color: #FBF3E4; font-size: 21rpx;
+  padding: 0 22rpx; height: 56rpx; line-height: 56rpx;
+  border-radius: 999rpx; border: none; margin: 0; flex-shrink: 0;
+}
+.go::after { border: none; }

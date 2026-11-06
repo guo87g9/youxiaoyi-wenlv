@@ -1,0 +1,40 @@
+<view class="wrap">
+  <view class="notice" style="margin-top:24rpx">
+    <view>⏱ 选游玩时长和偏好，按知识库里的官方线路排一版，每站都标了时间和停留时长。</view>
+  </view>
+
+  <view class="form">
+    <picker mode="selector" range="{{times}}" value="{{tIdx}}" bindchange="onTime">
+      <view class="picker"><text class="lb">时长</text><text class="val">{{times[tIdx]}}</text><text class="arw">›</text></view>
+    </picker>
+    <picker mode="selector" range="{{styles}}" value="{{sIdx}}" bindchange="onStyle">
+      <view class="picker"><text class="lb">偏好</text><text class="val">{{styles[sIdx]}}</text><text class="arw">›</text></view>
+    </picker>
+  </view>
+
+  <button class="gen" bindtap="gen">✦ 生成我的路线</button>
+
+  <view class="route" wx:if="{{route}}">
+    <view class="rt-title">{{route.title}}</view>
+    <view class="rt-sub">全程约 {{route.hours}} 小时</view>
+    <view class="rt-intro" wx:if="{{route.intro}}">{{route.intro}}</view>
+
+    <view class="stop" wx:for="{{route.stops}}" wx:key="name">
+      <view class="dot-line"><view class="dot"></view><view class="line"></view></view>
+      <view class="stop-body">
+        <view class="h5" bindtap="onStop" data-name="{{item.name}}">{{item.icon}} {{item.name}}<text class="dur">{{item.dur}}</text></view>
+        <view class="t">{{item.time}}</view>
+        <view class="p" wx:if="{{item.tip}}">{{item.tip}}</view>
+      </view>
+    </view>
+
+    <view class="alt" wx:if="{{alt.length}}">
+      <view class="alt-t">其他可选</view>
+      <view class="alt-i" wx:for="{{alt}}" wx:key="id" bindtap="onAlt" data-id="{{item.id}}">
+        {{item.title}}<text class="alt-h">{{item.hours}}h</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tip" wx:if="{{route}}">💡 线路取自高邮文旅公开线路资料；点任一站点可直接向问答页提问。</view>
+</view>

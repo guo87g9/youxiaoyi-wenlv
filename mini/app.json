@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/guide/guide",
+    "pages/route/route",
+    "pages/passport/passport",
+    "pages/faq/faq"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#8E2A1F",
+    "navigationBarTitleText": "邮小驿 · AI 邮驿智慧导游",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F7F1E4",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#8A7A63",
+    "selectedColor": "#8E2A1F",
+    "backgroundColor": "#FFFDF7",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/guide/guide", "text": "讲解" },
+      { "pagePath": "pages/route/route", "text": "路线" },
+      { "pagePath": "pages/passport/passport", "text": "护照" },
+      { "pagePath": "pages/faq/faq", "text": "问答" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

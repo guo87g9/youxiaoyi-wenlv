@@ -1,0 +1,38 @@
+/* 检索框 */
+.ask-box { padding: 20rpx 24rpx 8rpx; }
+.ask-row { display: flex; align-items: center; background: #FFFDF7; border: 1rpx solid #E4D9C0; border-radius: 999rpx; padding: 6rpx 8rpx 6rpx 30rpx; }
+.ask-input { flex: 1; font-size: 26rpx; height: 72rpx; line-height: 72rpx; }
+.ask-btn { width: 104rpx; height: 72rpx; line-height: 72rpx; text-align: center; border-radius: 999rpx; background: #8E2A1F; color: #FBF3E4; font-size: 26rpx; font-weight: 600; }
+.ask-btn.off { opacity: .45; }
+
+.hot { white-space: nowrap; margin-top: 16rpx; }
+.hot-i { display: inline-block; background: #F2E7D2; color: #6B4B2E; border-radius: 999rpx; padding: 10rpx 22rpx; font-size: 21rpx; margin-right: 12rpx; }
+
+/* 回答卡 */
+.acard { margin: 16rpx 24rpx; background: #FFFDF7; border-radius: 18rpx; padding: 24rpx; box-shadow: 0 6rpx 18rpx rgba(90,60,30,.06); }
+.acard .me { font-size: 24rpx; font-weight: 600; color: #8E2A1F; padding-bottom: 14rpx; border-bottom: 1rpx dashed #EDE3D0; }
+.acard .ai { font-size: 25rpx; color: #3E372E; line-height: 1.9; margin-top: 16rpx; }
+.acard .ai.miss { color: #6B6156; }
+.acard .src { margin-top: 16rpx; font-size: 20rpx; color: #A0855F; background: #F7EFDE; border-radius: 10rpx; padding: 10rpx 16rpx; }
+.acard .more { margin-top: 16rpx; }
+.acard .more-i { font-size: 23rpx; color: #2F6E63; padding: 12rpx 0; border-bottom: 1rpx solid #F0E8D8; }
+.acard .back { margin-top: 18rpx; font-size: 22rpx; color: #B9AC97; }
+
+/* 历史 */
+.hist-t { margin: 26rpx 24rpx 8rpx; font-size: 21rpx; color: #A79C8C; }
+.hist { margin: 8rpx 24rpx; padding: 18rpx 22rpx; background: #FBF6EA; border-radius: 14rpx; }
+.hist-q { font-size: 23rpx; color: #8E2A1F; font-weight: 600; }
+.hist-a { display: block; font-size: 21rpx; color: #7A7062; line-height: 1.75; margin-top: 8rpx; }
+
+/* 列表 */
+.cats { white-space: nowrap; padding: 18rpx 24rpx 4rpx; }
+.cat { display: inline-block; background: #FFFDF7; border: 1rpx solid #E4D9C0; border-radius: 999rpx; padding: 12rpx 24rpx; font-size: 22rpx; margin-right: 12rpx; color: #5B5347; }
+.cat.on { background: #8E2A1F; color: #FBF3E4; border-color: #8E2A1F; }
+.faq { margin: 12rpx 24rpx; background: #FFFDF7; border-radius: 16rpx; padding: 22rpx 24rpx; box-shadow: 0 4rpx 14rpx rgba(90,60,30,.05); }
+.faq .q { display: flex; align-items: center; }
+.faq .q-t { flex: 1; font-size: 25rpx; font-weight: 600; line-height: 1.6; }
+.faq .q-arw { color: #B9AC97; font-size: 32rpx; margin-left: 12rpx; }
+.faq.open .q-arw { transform: rotate(90deg); }
+.faq .a { font-size: 22rpx; color: #6B6156; line-height: 1.85; margin-top: 14rpx; padding-top: 14rpx; border-top: 1rpx dashed #EDE3D0; }
+.faq .src-in { margin-top: 12rpx; font-size: 20rpx; color: #A0855F; }
+.btm-tip { margin: 26rpx 24rpx 40rpx; font-size: 20rpx; color: #A79C8C; text-align: center; line-height: 1.7; }

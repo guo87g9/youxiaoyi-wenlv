@@ -1,0 +1,23 @@
+<view class="wrap">
+  <view class="passport">
+    <view class="pp-title">📮 运河邮路 · 数字集邮护照</view>
+    <view class="pp-sub">每到一个景点，向 AI 讲解员“报到”即可盖一枚数字邮戳</view>
+    <view class="progress"><view class="bar" style="width:{{percent}}%"></view></view>
+    <view class="pp-num">已集 {{count}} / {{total}} 站 · {{all ? '已集齐！' : '集齐可兑换文创礼包'}}</view>
+  </view>
+
+  <view class="grid">
+    <view wx:for="{{stamps}}" wx:key="spotId" class="stamp {{item.got?'got':''}}" bindtap="stamp" data-id="{{item.spotId}}">
+      <view class="s-ico">{{item.i}}</view>
+      <text class="s-nm">{{item.n}}</text>
+    </view>
+  </view>
+
+  <view class="reward" wx:if="{{all}}">
+    <view class="r-ico">🎁</view>
+    <view class="r-t">恭喜集齐「运河邮路」{{total}} 站！</view>
+    <view class="r-p">兑换码 GY-2026-XXXX · 盂城驿文创店可兑换：蛋雕书签 + 咸鸭蛋礼盒 9 折券</view>
+  </view>
+
+  <view class="reset" bindtap="reset">重置我的护照（演示用）</view>
+</view>

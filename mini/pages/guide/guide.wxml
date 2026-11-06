@@ -1,0 +1,42 @@
+<view class="g-page">
+  <scroll-view class="persona-bar" scroll-x enable-flex>
+    <view wx:for="{{personas}}" wx:key="name" class="persona {{cur===index?'on':''}}" bindtap="onPersona" data-idx="{{index}}">
+      <view class="av" style="background:{{item.color}}">{{item.avatar}}</view>
+      <text class="pname">{{item.short}}</text>
+    </view>
+  </scroll-view>
+
+  <view class="chat-box">
+    <view class="chat-head">
+      <view class="dot"></view>
+      <text class="ctitle">{{personas[cur].name}}</text>
+      <text class="ctag">RAG 知识库已就绪</text>
+    </view>
+
+    <scroll-view class="chat-body" scroll-y scroll-into-view="{{lastId}}" scroll-with-animation>
+      <view wx:for="{{messages}}" wx:key="id" id="m{{item.id}}" class="msg {{item.role}}">
+        <view class="who" wx:if="{{item.role==='ai'}}">{{item.who}}</view>
+        <text class="txt">{{item.text}}</text>
+        <view class="replay" wx:if="{{item.role==='ai' && item.done}}" catchtap="replay" data-text="{{item.text}}">🔊 重听</view>
+      </view>
+      <view style="height:16rpx"></view>
+    </scroll-view>
+
+    <scroll-view class="suggest" scroll-x>
+      <view class="chip" wx:for="{{suggest}}" wx:key="*this" bindtap="onSuggest" data-q="{{item}}">{{item}}</view>
+    </scroll-view>
+
+    <view class="input-row">
+      <input class="ipt" value="{{input}}" placeholder="向讲解员提问…" bindinput="onInput" confirm-type="send" bindconfirm="onSend" />
+      <button class="send" bindtap="onSend">发送</button>
+    </view>
+  </view>
+
+  <view class="voice-btn {{voiceOn?'on':''}}" bindtap="toggleVoice">
+    <view class="vico">🔊</view>
+    <view class="vtxt">
+      <text class="vb">语音讲解 · 童声</text>
+      <text class="vtip">{{tip}}</text>
+    </view>
+  </view>
+</view>
