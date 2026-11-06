@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#8E2A1F">
+<meta name="description" content="邮小驿 · 高邮 AI 邮驿智慧导游：17 处点位讲解、路线生成、数字集邮护照、AI 问答">
+<title>邮小驿 · 一码游高邮</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="page-head">
+  <b>邮小驿 · AI 邮驿智慧导游</b>
+  一人一驿一 AI，一码游高邮 · 赛道二（AI+产业 · 文旅板块）
+</div>
+
+<div class="phone">
+  <div class="screen">
+
+    <div class="statusbar"><span>9:41</span><span>邮小驿</span><span>▲ ● ▮</span></div>
+
+    <div class="app-body">
+      <div class="banner" id="banner">联网暂时不可用，已切回本地知识库（断网也可继续使用）</div>
+
+      <!-- ============ 首页 ============ -->
+      <section class="page active" id="pg-home">
+        <div class="hero">
+          <div class="seal" id="seal">郵</div>
+          <h1>邮小驿</h1>
+          <p>以盂城驿为原点的 AI 邮驿导游。<br>17 处点位、17 段实景讲解、一条能走完的运河邮路。</p>
+          <div class="badges">
+            <span>断网可播</span><span>单人可运营</span><span>大运河 · 高邮</span>
+          </div>
+          <div class="intro-line" id="introLine">
+            <div class="play">▶</div>
+            <div class="txt"><b>小史开场</b>21 秒：除了盂城驿，还有六处硬核古迹</div>
+          </div>
+          <div class="intro-more">
+            <button id="introTextBtn">看这段的文字稿</button>
+            <div class="intro-text" id="introText"></div>
+          </div>
+        </div>
+
+        <div class="entry-grid">
+          <button class="entry" data-entry="food">
+            <div class="e-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v8a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3"/><path d="M6 13v8"/><path d="M16 3c-1.5 1.5-2 3.5-2 5.5S15 13 16 13h1v8"/><path d="M17 3v10"/></svg></div>
+            <div class="e-txt"><b>吃什么</b><span>咸鸭蛋 · 汪豆腐 · 湖鲜</span></div>
+          </button>
+          <button class="entry" data-entry="stay">
+            <div class="e-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8"/><path d="M3 12h18v6"/><path d="M21 18v-4"/><path d="M6 12V8h6a3 3 0 0 1 3 3v1"/></svg></div>
+            <div class="e-txt"><b>住哪儿</b><span>老城民宿 · 湖景 · 连锁</span></div>
+          </button>
+          <button class="entry" data-entry="transport">
+            <div class="e-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="3"/><path d="M3 11h14"/><circle cx="7" cy="14" r="1"/><circle cx="13" cy="14" r="1"/><path d="M7 17l-2 3"/><path d="M13 17l2 3"/><path d="M17 8h3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2"/></svg></div>
+            <div class="e-txt"><b>怎么来</b><span>高铁 · 公交 · 自驾</span></div>
+          </button>
+          <button class="entry" data-entry="heritage">
+            <div class="e-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.2 5.6.5-4.2 3.7 1.3 5.5L12 15l-4.9 2.9 1.3-5.5-4.2-3.7 5.6-.5z"/></svg></div>
+            <div class="e-txt"><b>非遗</b><span>民歌 · 剪纸 · 高跷</span></div>
+          </button>
+        </div>
+
+        <div class="route-cta" data-go="route">
+          <div class="rc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6.5v13L9 17l6 2.5 6-2.5v-13L15 6.5z"/><path d="M9 4v13"/><path d="M15 6.5v13"/></svg></div>
+          <div class="rc-txt"><b>不知道先看哪儿？</b><span>按你的时间排一条能走完的路线</span></div>
+          <div class="rc-arrow">›</div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-h"><h3>景点</h3><span class="more" id="spotCount">17 处点位</span></div>
+        </div>
+        <div class="spot-filter" id="spotFilter"></div>
+        <div class="spots" id="spotGrid"></div>
+        <p class="hint">客流热度为示意数据，用于演示错峰提示，不代表实时客流。</p>
+      </section>
+
+      <!-- ============ 讲解 ============ -->
+      <section class="page" id="pg-guide">
+        <div class="backbar"><button data-go="home">‹ 返回首页</button><span>景点讲解</span></div>
+        <div class="guide-top">
+          <div class="row">
+            <div class="thumb"><img id="gThumb" alt=""></div>
+            <div>
+              <h2 id="gName">盂城驿</h2>
+              <div class="sub" id="gDesc">明代驿站 · 全国规模最大、保存最完好</div>
+            </div>
+            <button class="chg" data-go="home">换一处</button>
+          </div>
+          <div class="modebar" id="modebar"><i class="dot"></i><span id="modeText">演示模式 · 本地知识库 30 条</span></div>
+        </div>
+
+        <div class="voice-card" id="voiceCard">
+          <button class="vbtn" id="vbtn">▶</button>
+          <div class="vmeta">
+            <b id="vTitle">盂城驿 · 讲解</b>
+            <span id="vSub">24 秒 · 离线可播</span>
+            <div class="vsrc" id="vSrc"></div>
+            <div class="vprog"><i id="vprog"></i></div>
+          </div>
+        </div>
+
+        <div class="intro" id="gIntro"></div>
+
+        <div class="park" id="gPark"></div>
+
+        <div class="sec"><div class="sec-h"><h3>这处还能问</h3><span class="more" data-go="chat">去问答</span></div></div>
+        <div class="suggests" id="gSuggests"></div>
+        <div style="height:8px"></div>
+      </section>
+
+      <!-- ============ 路线 ============ -->
+      <section class="page" id="pg-route">
+        <div class="backbar"><button data-go="home">‹ 返回首页</button><span>路线规划</span></div>
+        <div class="sec"><div class="sec-h"><h3>排一条能走完的路线</h3></div></div>
+        <div class="picker">
+          <select id="selHours">
+            <option value="0">我有半天（约 3-4 小时）</option>
+            <option value="1" selected>我有一整天（约 7 小时）</option>
+            <option value="2">我想住一晚（两日一夜）</option>
+            <option value="3">带娃出行（少走路）</option>
+            <option value="4">想看红色线路</option>
+          </select>
+        </div>
+        <div class="picker" style="padding-top:0">
+          <select id="selStyle">
+            <option value="all">不限偏好</option>
+            <option value="culture">偏文化古迹</option>
+            <option value="food">偏吃喝</option>
+            <option value="nature">偏自然风景</option>
+            <option value="photo">偏拍照</option>
+          </select>
+        </div>
+        <button class="gen-btn" id="genBtn">生成路线</button>
+        <div id="routeBox"></div>
+        <p class="hint">路线由规则引擎按「时长 + 偏好 + 点位热度」组合生成，热度为示意数据。</p>
+      </section>
+
+      <!-- ============ 护照 ============ -->
+      <section class="page" id="pg-passport">
+        <div class="passport">
+          <h3>数字集邮护照</h3>
+          <div class="psub">走到现场 300 米内才能盖章。集齐 17 站，兑换「运河邮路」通关礼。</div>
+          <div class="progbar"><i id="progBar"></i></div>
+          <div class="prog-num" id="progNum">已集 0 / 17 站</div>
+        </div>
+
+        <div class="sec"><div class="sec-h"><h3>运河邮路</h3><span class="more" id="roadToggle">切换 2D</span></div></div>
+        <div class="road" id="road"></div>
+        <div class="road-tip" id="roadTip">点亮已打卡的邮戳 · 点击下方邮戳册打卡</div>
+
+        <div class="sec"><div class="sec-h"><h3>邮戳册</h3><span class="more" id="resetStamp">清除预览</span></div></div>
+        <div class="stamps" id="stampGrid"></div>
+
+        <div class="sec"><div class="sec-h"><h3>景区门票</h3><span class="more" id="ticketNote">暂未开放</span></div></div>
+        <div id="ticketList"></div>
+
+        <div class="sec"><div class="sec-h"><h3>商户工具（B 端）</h3></div></div>
+        <div class="tool" id="toolCard">
+          <h4>一键出宣传文案 / 短视频脚本</h4>
+          <div class="tsub">小微门店没有运营，AI 代写。断网可用，联网时由模型润色。</div>
+          <select id="shopSel"></select>
+          <select id="tplSel">
+            <option value="copy">宣传文案（朋友圈 / 大众点评）</option>
+            <option value="video">短视频脚本（15 秒口播）</option>
+          </select>
+          <button class="gen2" id="toolGen">生成</button>
+          <div class="out" id="toolOut"></div>
+        </div>
+        <div style="height:10px"></div>
+      </section>
+
+      <!-- ============ 问答 ============ -->
+      <section class="page" id="pg-chat">
+        <div class="chat-wrap">
+          <div class="chat" id="chat"></div>
+          <div class="suggests" id="chatSuggests"></div>
+          <div class="chat-input">
+            <input id="chatInput" placeholder="问点具体的：门票多少？半天怎么玩？" enterkeyhint="send">
+            <button id="sendBtn">↑</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <nav class="tabbar">
+      <button class="tab on" id="tb-home" data-go="home"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/></svg></span>首页</button>
+      <button class="tab" id="tb-passport" data-go="passport"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>护照</button>
+      <button class="tab" id="tb-chat" data-go="chat"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a7.5 7.5 0 0 1-7.5 7.5H6l-3 3V12a7.5 7.5 0 0 1 7.5-7.5h2A7.5 7.5 0 0 1 20 12z"/></svg></span>问小史</button>
+    </nav>
+
+  </div>
+
+</div>
+
+<div class="qr-line" id="qrLine"></div>
+
+<!-- 管理员面板 -->
+<div class="sheet" id="adminSheet">
+  <div class="panel">
+    <h3>管理员设置</h3>
+    <p>只有管理员可以开启实时联网。口令在服务端校验，页面不保存任何密钥。</p>
+    <input id="adminInput" type="password" placeholder="输入管理员口令" autocomplete="off">
+    <div class="kv" id="adminKv"></div>
+    <div class="row">
+      <button class="ghost" id="adminCancel">取消</button>
+      <button class="primary" id="adminOk">解锁</button>
+    </div>
+  </div>
+</div>
+
+<!-- 通用详情层：吃 / 住 / 行 / 非遗 / 门票 共用 -->
+<div class="sheet detail" id="detailSheet">
+  <div class="panel">
+    <div class="d-head">
+      <h3 id="dTitle">详情</h3>
+      <button class="d-close" id="dClose">✕</button>
+    </div>
+    <div class="d-body" id="dBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<!-- 本地配置：存在则用真实密钥，不存在自动降级（config.js 不入库） -->
+<script>
+(function () {
+  var s = document.createElement("script");
+  s.src = "config.js";
+  s.onerror = function () {
+    // 没配 config.js 时给一份安全默认值，保证功能可跑
+    window.YXY_CONFIG = window.YXY_CONFIG || { map: { tk: "" }, api: { base: "" }, geo: { radius: 300 } };
+  };
+  document.write(s.outerHTML);
+})();
+</script>
+<script src="shared/qa.js"></script>
+<script src="shared/map.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

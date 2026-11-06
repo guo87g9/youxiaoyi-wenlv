@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="龙虬庄遗址">
+<defs>
+  <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+    <rect width="6" height="6" fill="#F7F1E5"/>
+    <circle cx="1" cy="1" r="0.55" fill="#EFE6D2"/>
+    <circle cx="4" cy="4" r="0.5" fill="#EFE6D2"/>
+  </pattern>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F7F1E5" stop-opacity="0"/>
+    <stop offset="1" stop-color="#EFE6D2" stop-opacity=".9"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="600" fill="url(#grain)"/>
+<rect width="800" height="600" fill="url(#sky)"/>
+<g stroke="#2B2B2B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M40 400 H760" stroke="#2F6E63" stroke-width="2.5" opacity=".35"/>
+<path d="M60 400 h680 v92 H60 Z" fill="#EFE6D2"/>
+<path d="M60 424 h680" stroke-width="2" opacity=".5" stroke-dasharray="10 8"/>
+<path d="M60 448 h680" stroke-width="2" opacity=".5" stroke-dasharray="10 8"/>
+<path d="M60 470 h680" stroke-width="2" opacity=".5" stroke-dasharray="10 8"/>
+<path d="M360 400 q-8 -70 26 -96 h28 q34 26 26 96 q-40 18 -80 0 Z" fill="#EFE6D2"/>
+<path d="M378 304 h44" stroke-width="5"/>
+<path d="M366 352 q34 14 68 0" stroke-width="2" opacity=".6"/>
+<path d="M372 372 q28 12 56 0" stroke-width="2" opacity=".6"/>
+<path d="M540 400 v-88" stroke-width="3"/>
+<path d="M540 330 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M540 330 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M540 346 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M540 346 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M540 362 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M540 362 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M540 378 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M540 378 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M580 400 v-88" stroke-width="3"/>
+<path d="M580 330 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M580 330 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M580 346 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M580 346 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M580 362 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M580 362 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M580 378 q14 -8 22 -2" stroke-width="2.5"/>
+<path d="M580 378 q-14 -8 -22 -2" stroke-width="2.5"/>
+<path d="M210 400 l32 -12 8 10 -30 14 Z" fill="#EFE6D2" stroke-width="2.5"/>
+</g>
+<g opacity=".9">
+  <rect x="676" y="500" width="76" height="76" rx="6" fill="#B93A2B"/>
+  <rect x="686" y="510" width="56" height="56" rx="3" fill="none" stroke="#F7F1E5" stroke-width="2.5"/>
+  <text x="714" y="548" font-size="30" text-anchor="middle" fill="#F7F1E5"
+        font-family="STKaiti, KaiTi, serif">龍</text>
+</g>
+<text x="40" y="556" font-size="21" fill="#3A3733" opacity=".55"
+      font-family="STKaiti, KaiTi, serif">邮小驿 · 龙虬庄遗址</text>
+<text x="40" y="582" font-size="15" fill="#3A3733" opacity=".35"
+      font-family="system-ui, sans-serif">原创矢量插画 / 非实景照片</text>
+</svg>

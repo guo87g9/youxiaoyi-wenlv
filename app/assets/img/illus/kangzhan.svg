@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="抗日战争最后一役纪念馆">
+<defs>
+  <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+    <rect width="6" height="6" fill="#F7F1E5"/>
+    <circle cx="1" cy="1" r="0.55" fill="#EFE6D2"/>
+    <circle cx="4" cy="4" r="0.5" fill="#EFE6D2"/>
+  </pattern>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F7F1E5" stop-opacity="0"/>
+    <stop offset="1" stop-color="#EFE6D2" stop-opacity=".9"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="600" fill="url(#grain)"/>
+<rect width="800" height="600" fill="url(#sky)"/>
+<g stroke="#2B2B2B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M40 452 H760" stroke="#2F6E63" stroke-width="2.5" opacity=".35"/>
+<path d="M356 452 V196 h88 v256" fill="#EFE6D2"/>
+<path d="M340 452 h120 v-20 H340 Z" fill="#EFE6D2"/>
+<path d="M400 196 l0 -34" stroke-width="4"/>
+<path d="M400 162 l34 12 -34 12 Z" fill="#B93A2B" stroke="#3A3733" stroke-width="2"/>
+<path d="M376 250 h48 M376 274 h48 M376 298 h48" stroke-width="2.5" opacity=".55"/>
+<path d="M232 452 v-120" stroke-width="3"/>
+<path d="M188 356 q44 -26 88 0" stroke-width="3"/>
+<path d="M198 386 q34 -26 68 0" stroke-width="3"/>
+<path d="M208 416 q24 -26 48 0" stroke-width="3"/>
+<path d="M568 452 v-136" stroke-width="3"/>
+<path d="M524 340 q44 -26 88 0" stroke-width="3"/>
+<path d="M534 370 q34 -26 68 0" stroke-width="3"/>
+<path d="M544 400 q24 -26 48 0" stroke-width="3"/>
+<path d="M330 452 h140 M316 476 h168 M302 500 h196" stroke-width="2.5" opacity=".7"/>
+</g>
+<g opacity=".9">
+  <rect x="676" y="500" width="76" height="76" rx="6" fill="#3C5470"/>
+  <rect x="686" y="510" width="56" height="56" rx="3" fill="none" stroke="#F7F1E5" stroke-width="2.5"/>
+  <text x="714" y="548" font-size="30" text-anchor="middle" fill="#F7F1E5"
+        font-family="STKaiti, KaiTi, serif">役</text>
+</g>
+<text x="40" y="556" font-size="21" fill="#3A3733" opacity=".55"
+      font-family="STKaiti, KaiTi, serif">邮小驿 · 抗日战争最后一役纪念馆</text>
+<text x="40" y="582" font-size="15" fill="#3A3733" opacity=".35"
+      font-family="system-ui, sans-serif">原创矢量插画 / 非实景照片</text>
+</svg>

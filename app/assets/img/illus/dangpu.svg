@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="高邮当铺">
+<defs>
+  <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+    <rect width="6" height="6" fill="#F7F1E5"/>
+    <circle cx="1" cy="1" r="0.55" fill="#EFE6D2"/>
+    <circle cx="4" cy="4" r="0.5" fill="#EFE6D2"/>
+  </pattern>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F7F1E5" stop-opacity="0"/>
+    <stop offset="1" stop-color="#EFE6D2" stop-opacity=".9"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="600" fill="url(#grain)"/>
+<rect width="800" height="600" fill="url(#sky)"/>
+<g stroke="#2B2B2B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M40 430 H760" stroke="#2F6E63" stroke-width="2.5" opacity=".35"/>
+<path d="M200 174 Q248.0 130.8 400.0 120 Q552.0 130.8 600 174 Z" fill="#EFE6D2"/>
+<path d="M184 178 Q264.0 158.88 400.0 152.4 Q536.0 158.88 616 178" stroke-width="3.5"/>
+<path d="M400.0 126 v42" stroke-width="2" opacity=".5"/>
+<rect x="210" y="174" width="380" height="210" fill="#EFE6D2"/>
+<rect x="235.33333333333331" y="211.8" width="76.0" height="92.4" rx="2" fill="#F7F1E5" opacity=".8"/>
+<rect x="362.0" y="211.8" width="76.0" height="92.4" rx="2" fill="#F7F1E5" opacity=".8"/>
+<rect x="488.66666666666674" y="211.8" width="76.0" height="92.4" rx="2" fill="#F7F1E5" opacity=".8"/>
+<rect x="196" y="384" width="408" height="26" fill="#EFE6D2"/>
+<path d="M170 470 h460 M158 496 h484" stroke-width="2.5" opacity=".6"/>
+<rect x="256" y="410" width="290" height="60" fill="#EFE6D2"/>
+<path d="M256 424 h290" stroke-width="2" opacity=".55"/>
+<path d="M360 396 q40 -34 80 0 q-40 22 -80 0 Z" fill="#C99A3F" stroke="#3A3733" stroke-width="2.5"/>
+<path d="M380 388 q20 -14 40 0" stroke-width="2" fill="none"/>
+<rect x="330" y="196" width="140" height="46" rx="3" fill="#B93A2B" stroke="#3A3733" stroke-width="2"/>
+<text x="400" y="230" font-size="27" text-anchor="middle" fill="#F7F1E5" font-family="STKaiti, KaiTi, serif">同兴当</text>
+</g>
+<g opacity=".9">
+  <rect x="676" y="500" width="76" height="76" rx="6" fill="#B93A2B"/>
+  <rect x="686" y="510" width="56" height="56" rx="3" fill="none" stroke="#F7F1E5" stroke-width="2.5"/>
+  <text x="714" y="548" font-size="30" text-anchor="middle" fill="#F7F1E5"
+        font-family="STKaiti, KaiTi, serif">當</text>
+</g>
+<text x="40" y="556" font-size="21" fill="#3A3733" opacity=".55"
+      font-family="STKaiti, KaiTi, serif">邮小驿 · 高邮当铺</text>
+<text x="40" y="582" font-size="15" fill="#3A3733" opacity=".35"
+      font-family="system-ui, sans-serif">原创矢量插画 / 非实景照片</text>
+</svg>

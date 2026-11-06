@@ -1,0 +1,9 @@
+# 本地配置：含天地图浏览器端 key，不进版本库
+# 首次使用：cp app/config.example.js app/config.js 并填入 tk
+app/config.js
+
+# 构建产物（可由 tools/build.py 一键重建）
+dist/
+*.log
+.DS_Store
+node_modules/

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="北门大街">
+<defs>
+  <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+    <rect width="6" height="6" fill="#F7F1E5"/>
+    <circle cx="1" cy="1" r="0.55" fill="#EFE6D2"/>
+    <circle cx="4" cy="4" r="0.5" fill="#EFE6D2"/>
+  </pattern>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F7F1E5" stop-opacity="0"/>
+    <stop offset="1" stop-color="#EFE6D2" stop-opacity=".9"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="600" fill="url(#grain)"/>
+<rect width="800" height="600" fill="url(#sky)"/>
+<g stroke="#2B2B2B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M40 452 H760" stroke="#2F6E63" stroke-width="2.5" opacity=".35"/>
+<path d="M240 452 V300 M560 452 V300" stroke-width="12"/>
+<path d="M200 250 Q248.0 216.4 400.0 208 Q552.0 216.4 600 250 Z" fill="#EFE6D2"/>
+<path d="M184 254 Q264.0 238.24 400.0 233.2 Q536.0 238.24 616 254" stroke-width="3.5"/>
+<path d="M400.0 214 v30" stroke-width="2" opacity=".5"/>
+<path d="M250 296 h300" stroke-width="8"/>
+<path d="M300 296 v-40 M500 296 v-40" stroke-width="6"/>
+<path d="M300 244 Q324.0 220.0 400.0 214 Q476.0 220.0 500 244 Z" fill="#EFE6D2"/>
+<path d="M284 248 Q332.0 235.6 400.0 232.0 Q468.0 235.6 516 248" stroke-width="3.5"/>
+<path d="M400.0 220 v18" stroke-width="2" opacity=".5"/>
+<rect x="352" y="252" width="96" height="40" rx="3" fill="#B93A2B" stroke="#3A3733" stroke-width="2"/>
+<text x="400" y="282" font-size="23" text-anchor="middle" fill="#F7F1E5" font-family="STKaiti, KaiTi, serif">北门</text>
+<rect x="120" y="356" width="96" height="96" fill="#EFE6D2"/>
+<path d="M112 356 h112 l-16 -22 h-80 Z" fill="#EFE6D2"/>
+<rect x="136" y="382" width="64" height="38.400000000000006" fill="#F7F1E5" opacity=".8"/>
+<rect x="664" y="342" width="100" height="110" fill="#EFE6D2"/>
+<path d="M656 342 h116 l-16 -22 h-84 Z" fill="#EFE6D2"/>
+<rect x="680" y="368" width="68" height="44.0" fill="#F7F1E5" opacity=".8"/>
+<path d="M272 300 v22" stroke-width="2.5"/>
+<ellipse cx="272" cy="340" rx="16" ry="20" fill="#B93A2B" stroke="#3A3733" stroke-width="2.5"/>
+<path d="M272 360 v12" stroke-width="2.5"/>
+<path d="M528 300 v22" stroke-width="2.5"/>
+<ellipse cx="528" cy="340" rx="16" ry="20" fill="#B93A2B" stroke="#3A3733" stroke-width="2.5"/>
+<path d="M528 360 v12" stroke-width="2.5"/>
+<path d="M150 500 h500" stroke-width="2.5" opacity=".45" stroke-dasharray="16 12"/>
+</g>
+<g opacity=".9">
+  <rect x="676" y="500" width="76" height="76" rx="6" fill="#C99A3F"/>
+  <rect x="686" y="510" width="56" height="56" rx="3" fill="none" stroke="#F7F1E5" stroke-width="2.5"/>
+  <text x="714" y="548" font-size="30" text-anchor="middle" fill="#F7F1E5"
+        font-family="STKaiti, KaiTi, serif">北</text>
+</g>
+<text x="40" y="556" font-size="21" fill="#3A3733" opacity=".55"
+      font-family="STKaiti, KaiTi, serif">邮小驿 · 北门大街</text>
+<text x="40" y="582" font-size="15" fill="#3A3733" opacity=".35"
+      font-family="system-ui, sans-serif">原创矢量插画 / 非实景照片</text>
+</svg>

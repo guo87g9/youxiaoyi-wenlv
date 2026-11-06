@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="王氏纪念馆">
+<defs>
+  <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+    <rect width="6" height="6" fill="#F7F1E5"/>
+    <circle cx="1" cy="1" r="0.55" fill="#EFE6D2"/>
+    <circle cx="4" cy="4" r="0.5" fill="#EFE6D2"/>
+  </pattern>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F7F1E5" stop-opacity="0"/>
+    <stop offset="1" stop-color="#EFE6D2" stop-opacity=".9"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="600" fill="url(#grain)"/>
+<rect width="800" height="600" fill="url(#sky)"/>
+<g stroke="#2B2B2B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M40 452 H760" stroke="#2F6E63" stroke-width="2.5" opacity=".35"/>
+<path d="M250 226 Q286.0 186.0 400.0 176 Q514.0 186.0 550 226 Z" fill="#EFE6D2"/>
+<path d="M234 230 Q298.0 212.0 400.0 206.0 Q502.0 212.0 566 230" stroke-width="3.5"/>
+<path d="M400.0 182 v38" stroke-width="2" opacity=".5"/>
+<rect x="262" y="226" width="276" height="116" fill="#EFE6D2"/>
+<rect x="303.4" y="246.88" width="55.2" height="51.04" rx="2" fill="#F7F1E5" opacity=".8"/>
+<rect x="441.4" y="246.88" width="55.2" height="51.04" rx="2" fill="#F7F1E5" opacity=".8"/>
+<rect x="238" y="342" width="324" height="22" fill="#EFE6D2"/>
+<rect x="366" y="252" width="68" height="112" fill="#F7F1E5" stroke-width="3"/>
+<circle cx="336" cy="430" r="22" fill="#EFE6D2"/>
+<circle cx="464" cy="430" r="22" fill="#EFE6D2"/>
+<path d="M300 452 h200" stroke-width="3"/>
+<path d="M170 470 q60 -34 118 -6 q58 -28 118 6 q-58 30 -118 6 q-58 24 -118 -6 Z" fill="#EFE6D2" stroke-width="2.5"/>
+<rect x="352" y="188" width="96" height="38" rx="3" fill="#B93A2B" stroke="#3A3733" stroke-width="2"/>
+<text x="400" y="216" font-size="23" text-anchor="middle" fill="#F7F1E5" font-family="STKaiti, KaiTi, serif">王氏</text>
+</g>
+<g opacity=".9">
+  <rect x="676" y="500" width="76" height="76" rx="6" fill="#3C5470"/>
+  <rect x="686" y="510" width="56" height="56" rx="3" fill="none" stroke="#F7F1E5" stroke-width="2.5"/>
+  <text x="714" y="548" font-size="30" text-anchor="middle" fill="#F7F1E5"
+        font-family="STKaiti, KaiTi, serif">王</text>
+</g>
+<text x="40" y="556" font-size="21" fill="#3A3733" opacity=".55"
+      font-family="STKaiti, KaiTi, serif">邮小驿 · 王氏纪念馆</text>
+<text x="40" y="582" font-size="15" fill="#3A3733" opacity=".35"
+      font-family="system-ui, sans-serif">原创矢量插画 / 非实景照片</text>
+</svg>
