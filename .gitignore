@@ -7,3 +7,9 @@ dist/
 *.log
 .DS_Store
 node_modules/
+
+# 构建产物一律出到工作区根 /workspace/交付，仓库内不再留副本
+交付/邮小驿-单文件版.html
+交付/邮小驿-单文件版-含音频.html
+交付/邮小驿-网页版.zip
+交付/_build_report.md
