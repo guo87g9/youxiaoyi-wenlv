@@ -124,6 +124,34 @@ def main():
     dist_files = list(walk_files(DIST))
     dist_size = size_of(dist_files)
 
+    # ---------- 5.1 docs/（GitHub Pages 源） ----------
+    # Pages 只接受仓库根目录或 /docs，且不允许多余的构建步骤时最省事的形态就是静态副本。
+    # 只放前端必需的运行文件：不含 config.js（key）、不含音频（15MB，Pages 走流量且非必需）。
+    DOCS = os.path.join(ROOT, "docs")
+    if os.path.isdir(DOCS):
+        shutil.rmtree(DOCS)
+    os.makedirs(DOCS)
+    for name in ("index.html", "app.css", "app.js", "data.js", "data-kb.js",
+                 "config.example.js", "CREDITS.md"):
+        shutil.copy(os.path.join(APP, name), DOCS)
+    shutil.copytree(os.path.join(APP, "shared"), os.path.join(DOCS, "shared"))
+    # 图片保留（体量小、首屏要用），音频只拷索引到的文件会被音频体积拖垮，故整体跳过
+    img_src = os.path.join(APP, "assets", "img")
+    if os.path.isdir(img_src):
+        shutil.copytree(img_src, os.path.join(DOCS, "assets", "img"))
+    lib_src = os.path.join(APP, "assets", "lib")
+    if os.path.isdir(lib_src) and any(os.scandir(lib_src)):
+        shutil.copytree(lib_src, os.path.join(DOCS, "assets", "lib"))
+    # 占位 config.js：不含 key，只保证不出现 404 console error；地图降级为手绘示意
+    with open(os.path.join(DOCS, "config.js"), "w", encoding="utf-8") as f:
+        f.write('/* GitHub Pages 演示用占位配置：不含任何密钥，key 留空 → 地图自动降级为手绘示意\n'
+                ' * 本地开发请复制 config.example.js 到 config.js 并填入自己的天地图 key\n'
+                ' */\n'
+                'window.YXY_CONFIG = window.YXY_CONFIG || {};\n'
+                'window.YXY_CONFIG.map = window.YXY_CONFIG.map || { tk: "" };\n')
+    docs_files = list(walk_files(DOCS))
+    docs_size = size_of(docs_files)
+
     # ---------- 6. zip ----------
     os.makedirs(OUT, exist_ok=True)
     zip_path = os.path.join(OUT, "邮小驿-网页版.zip")
@@ -183,6 +211,8 @@ def main():
                  % (thumb_webp, thumb_svg))
     lines.append("- 首屏总计：%.0f KB  （≤350KB %s）" % (total_first, "达标" if total_first <= 350 else "超标"))
     lines.append("- dist 总体积：%.2f MB / %d 个文件" % (mb(dist_size), len(dist_files)))
+    lines.append("- docs/（GitHub Pages 源，不含音频与 key）：%.2f MB / %d 个文件"
+                 % (mb(docs_size), len(docs_files)))
     lines.append("- 网页版 zip：%.2f MB / %d 个文件" % (mb(zip_size), n_zip))
     for p in (single, single_a):
         if os.path.exists(p):

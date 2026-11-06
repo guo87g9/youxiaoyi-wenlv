@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="高邮博物馆">
+<defs>
+  <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+    <rect width="6" height="6" fill="#F7F1E5"/>
+    <circle cx="1" cy="1" r="0.55" fill="#EFE6D2"/>
+    <circle cx="4" cy="4" r="0.5" fill="#EFE6D2"/>
+  </pattern>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F7F1E5" stop-opacity="0"/>
+    <stop offset="1" stop-color="#EFE6D2" stop-opacity=".9"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="600" fill="url(#grain)"/>
+<rect width="800" height="600" fill="url(#sky)"/>
+<g stroke="#2B2B2B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M40 452 H760" stroke="#2F6E63" stroke-width="2.5" opacity=".35"/>
+<path d="M170 452 V246 h460 v206 Z" fill="#EFE6D2"/>
+<path d="M150 246 h500" stroke-width="4"/>
+<rect x="196" y="300" width="408" height="34" fill="#F7F1E5" opacity=".85" stroke-width="2"/>
+<path d="M210 300 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M262 300 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M314 300 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M366 300 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M418 300 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M470 300 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M522 300 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M574 300 v34" stroke-width="1.6" opacity=".5"/>
+<rect x="196" y="356" width="408" height="34" fill="#F7F1E5" opacity=".85" stroke-width="2"/>
+<path d="M210 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M262 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M314 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M366 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M418 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M470 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M522 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M574 356 v34" stroke-width="1.6" opacity=".5"/>
+<path d="M150 246 q250 -54 500 0" stroke-width="4"/>
+<path d="M400 218 v-34" stroke-width="3"/>
+<circle cx="400" cy="178" r="8" fill="#B93A2B" stroke="#3A3733" stroke-width="2"/>
+<rect x="356" y="404" width="88" height="48" fill="#F7F1E5" stroke-width="3"/>
+</g>
+<g opacity=".9">
+  <rect x="676" y="500" width="76" height="76" rx="6" fill="#2F6E63"/>
+  <rect x="686" y="510" width="56" height="56" rx="3" fill="none" stroke="#F7F1E5" stroke-width="2.5"/>
+  <text x="714" y="548" font-size="30" text-anchor="middle" fill="#F7F1E5"
+        font-family="STKaiti, KaiTi, serif">博</text>
+</g>
+<text x="40" y="556" font-size="21" fill="#3A3733" opacity=".55"
+      font-family="STKaiti, KaiTi, serif">邮小驿 · 高邮博物馆</text>
+<text x="40" y="582" font-size="15" fill="#3A3733" opacity=".35"
+      font-family="system-ui, sans-serif">原创矢量插画 / 非实景照片</text>
+</svg>

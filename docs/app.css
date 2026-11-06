@@ -1,0 +1,418 @@
+/* 邮小驿 · 样式（移动优先，桌面 >=500px 才套手机壳） */
+:root{
+  --red:#B93A2B; --red-d:#8E2A1F; --teal:#2F6E63; --gold:#C99A3F;
+  --ink:#2B2B2B; --ink-2:#5A554E; --paper:#F7F1E5; --paper-2:#EFE6D2; --paper-3:#E4D9C0;
+  --tab-h:56px; --app-h:100vh; --safe-b:0px;
+  --shadow:0 18px 44px rgba(43,43,43,.16);
+  --r:14px;
+}
+@supports (height:100dvh){ :root{ --app-h:100dvh; } }
+@supports (padding:env(safe-area-inset-bottom)){ :root{ --safe-b:env(safe-area-inset-bottom); } }
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{
+  background:var(--paper);color:var(--ink);
+  font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  display:block;padding:0;
+}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+
+/* ===== 手机壳：移动端是真全屏 ===== */
+.phone{width:100%;height:var(--app-h);padding:0;background:transparent;position:relative}
+.screen{width:100%;height:100%;background:var(--paper);display:flex;flex-direction:column;overflow:hidden;position:relative}
+
+/* 真机上不需要模拟状态栏 / 桌面标题 / 二维码 */
+.statusbar,.notch,.page-head{display:none}
+
+.app-body{flex:1;min-height:0;position:relative}
+
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;display:none;
+  -webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  padding-bottom:calc(var(--tab-h) + var(--safe-b) + 14px)}
+.page.active{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* 问答页自己管滚动，不要再叠 tabbar 内边距 */
+#pg-chat{overflow:hidden;padding-bottom:0}
+body.kb-open .tabbar{display:none}
+.qr-line{display:none}
+
+/* ===== 底部 tab ===== */
+.tabbar{height:calc(var(--tab-h) + var(--safe-b));padding-bottom:var(--safe-b);
+  display:flex;background:#fff;border-top:1px solid var(--paper-3);flex-shrink:0;z-index:20}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  color:#9A9288;font-size:12px;transition:color .15s}
+.tab .ico{font-size:21px;line-height:1}
+.tab.on{color:var(--red)}
+.tab:active{background:#FBF7EE}
+
+/* ===== 首页 hero ===== */
+.hero{position:relative;padding:22px 18px 18px;background:
+  radial-gradient(120% 90% at 15% 0%, #C8493A 0%, #B93A2B 42%, #8E2A1F 100%);
+  color:#fff;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-40px;top:-30px;width:190px;height:190px;border-radius:50%;
+  background:rgba(255,255,255,.07)}
+.hero .seal{width:58px;height:58px;border:2px solid rgba(255,255,255,.55);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:27px;margin-bottom:12px}
+.hero h1{margin:0 0 6px;font-size:25px;letter-spacing:1px;font-weight:700}
+.hero p{margin:0;font-size:13.5px;opacity:.88;line-height:1.65}
+.hero .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hero .badges span{font-size:11.5px;padding:4px 9px;border-radius:20px;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.22)}
+.hero .intro-line{margin-top:14px;display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.16);
+  border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 12px}
+.hero .intro-line .play{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--red);
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hero .intro-line .txt{font-size:12.5px;line-height:1.5;opacity:.95}
+.hero .intro-line .txt b{display:block;font-size:13.5px;font-weight:600}
+.hero .intro-more{margin-top:8px}
+.hero .intro-more button{font-size:11.5px;color:rgba(255,255,255,.75);text-decoration:underline}
+.hero .intro-text{display:none;font-size:12px;line-height:1.75;color:rgba(255,255,255,.85);
+  background:rgba(0,0,0,.18);border-radius:10px;padding:10px 12px;margin-top:8px}
+.hero .intro-text.show{display:block}
+
+/* 快捷入口 */
+/* 首页四大入口：吃 / 住 / 行 / 非遗 */
+.entry-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px 14px 4px}
+.entry{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #F0E7D4;
+  border-radius:var(--r);padding:11px 12px;text-align:left;transition:transform .12s,background .12s}
+.entry:active{transform:scale(.975);background:#FBF7EE}
+.entry .e-ico{width:34px;height:34px;flex-shrink:0;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;background:var(--paper-2);color:var(--red-d)}
+.entry .e-ico svg{width:19px;height:19px}
+.route-cta .rc-ico svg{width:21px;height:21px;display:block}
+.tabbar .ico svg{width:20px;height:20px;display:block;margin:0 auto}
+.entry .e-txt{min-width:0}
+.entry .e-txt b{display:block;font-size:13.5px;line-height:1.35}
+.entry .e-txt span{display:block;font-size:10.5px;color:#9A9186;margin-top:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ===== 通用区块 ===== */
+.sec{padding:16px 14px 4px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.sec-h h3{margin:0;font-size:16.5px;letter-spacing:.5px}
+.sec-h .more{font-size:12px;color:var(--teal)}
+.sec-h .more:active{opacity:.6}
+.hint{font-size:11.5px;color:#9A9288;padding:2px 14px 8px;line-height:1.6}
+
+/* 景点卡（两列实景网格） */
+.spot-filter{display:flex;gap:7px;overflow-x:auto;padding:0 14px 12px;scrollbar-width:none}
+.spot-filter::-webkit-scrollbar{display:none}
+.spot-filter button{flex:0 0 auto;font-size:12.5px;padding:6px 12px;border-radius:20px;
+  background:#fff;border:1px solid #EFE6D2;color:var(--ink-2)}
+.spot-filter button.on{background:var(--red);border-color:var(--red);color:#fff}
+
+.spots{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 8px}
+.spot{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid #F0E7D4;
+  box-shadow:0 2px 10px rgba(43,43,43,.05);position:relative}
+.spot:active{transform:scale(.985)}
+.spot .pic{position:relative;width:100%;aspect-ratio:4/3;background:var(--paper-2);overflow:hidden}
+.spot .pic img{width:100%;height:100%;object-fit:cover}
+.spot .pic .cat{position:absolute;left:8px;top:8px;font-size:10.5px;color:#fff;padding:2px 7px;
+  border-radius:10px;background:rgba(43,43,43,.55);backdrop-filter:blur(4px)}
+.spot .pic .cat.hist{background:rgba(185,58,43,.86)}
+.spot .pic .cat.museum{background:rgba(60,84,112,.86)}
+.spot .pic .cat.nature{background:rgba(47,110,99,.86)}
+.spot .pic .cat.food{background:rgba(201,154,63,.9)}
+.spot .info{padding:9px 10px 10px}
+.spot .info h4{margin:0 0 3px;font-size:14.5px;font-weight:600}
+.spot .info p{margin:0;font-size:11.5px;color:#8B8378;line-height:1.5}
+.spot .badge-audio{position:absolute;right:8px;bottom:8px;font-size:10px;background:rgba(255,255,255,.92);
+  color:var(--red);padding:2px 7px;border-radius:10px;font-weight:600}
+
+/* ===== 讲解页 ===== */
+.guide-top{padding:14px 14px 10px;background:#fff;border-bottom:1px solid #F2EADA;position:sticky;top:0;z-index:6}
+.guide-top .row{display:flex;align-items:center;gap:10px}
+.guide-top .thumb{width:52px;height:52px;border-radius:11px;overflow:hidden;background:var(--paper-2);flex-shrink:0}
+.guide-top .thumb img{width:100%;height:100%;object-fit:cover}
+.guide-top h2{margin:0;font-size:17px;font-weight:600}
+.guide-top .sub{font-size:11.5px;color:#8B8378;margin-top:2px}
+.guide-top .chg{margin-left:auto;font-size:12px;color:var(--teal);flex-shrink:0}
+
+.modebar{display:flex;align-items:center;gap:6px;font-size:11px;color:#8B8378;margin-top:9px}
+.modebar .dot{width:7px;height:7px;border-radius:50%;background:#B4ADA2;flex-shrink:0}
+.modebar.live .dot{background:#2FA36B;box-shadow:0 0 0 3px rgba(47,163,107,.16)}
+.modebar.fail .dot{background:#D9534F;box-shadow:0 0 0 3px rgba(217,83,79,.16)}
+
+/* 语音条 */
+.voice-card{margin:12px 14px;background:#fff;border:1px solid #F0E7D4;border-radius:var(--r);padding:12px 13px;
+  display:flex;align-items:center;gap:11px;box-shadow:0 2px 10px rgba(43,43,43,.05)}
+.voice-card .vbtn{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:16px}
+.voice-card.playing .vbtn{background:var(--red-d)}
+.voice-card.failed .vbtn{background:#B4ADA2}
+.voice-card .vmeta{flex:1;min-width:0}
+.voice-card .vmeta b{font-size:13.5px;display:block;font-weight:600}
+.voice-card .vmeta span{font-size:11.5px;color:#8B8378;line-height:1.5;display:block}
+.voice-card .vsrc{font-size:10.5px;margin-top:3px;display:block}
+.voice-card .vsrc.official{color:var(--teal)}
+.voice-card .vsrc.ai{color:#A39B8E}
+.voice-card .vprog{height:3px;background:var(--paper-3);border-radius:2px;margin-top:7px;overflow:hidden}
+.voice-card .vprog i{display:block;height:100%;width:0;background:var(--red);transition:width .2s linear}
+
+/* 讲解正文 */
+.intro{padding:0 14px 14px}
+.intro p{margin:0 0 8px;font-size:14.5px;line-height:1.85;color:#3A3733;text-align:justify}
+.intro .src{font-size:11px;color:#A39B8E;margin-top:6px;line-height:1.6}
+
+/* 问答 */
+.chat-wrap{display:flex;flex-direction:column;height:100%}
+.chat{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 14px 4px;
+  overscroll-behavior:contain}
+.msg{display:flex;margin-bottom:12px}
+.msg .bub{max-width:82%;padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.7;
+  white-space:pre-wrap;word-break:break-word}
+.msg.ai .bub{background:#fff;border:1px solid #F0E7D4;border-top-left-radius:4px}
+.msg.user{justify-content:flex-end}
+.msg.user .bub{background:var(--red);color:#fff;border-top-right-radius:4px}
+.msg .src{margin-top:7px;font-size:10.5px;color:#A39B8E;line-height:1.6;border-top:1px dashed #EFE6D2;padding-top:6px}
+.msg .src a{color:var(--teal);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.msg .tip{font-size:10px;color:#B4ADA2;margin-top:5px}
+.msg .speak{display:inline-flex;align-items:center;justify-content:center;margin-top:8px;
+  min-width:44px;height:30px;padding:0 12px;border-radius:15px;background:var(--paper);
+  border:1px solid #EFE6D2;font-size:12px;color:var(--teal);gap:4px}
+.msg .speak:active{background:#F3EBD9}
+.suggests{display:flex;gap:7px;overflow-x:auto;padding:8px 14px;scrollbar-width:none;background:var(--paper)}
+.suggests::-webkit-scrollbar{display:none}
+.suggests button{flex:0 0 auto;font-size:12px;padding:6px 11px;border-radius:16px;background:#fff;
+  border:1px solid #EFE6D2;color:var(--ink-2)}
+.chat-input{display:flex;gap:8px;padding:10px 12px calc(10px + var(--safe-b));background:#fff;
+  border-top:1px solid #F2EADA;flex-shrink:0}
+.chat-input input{flex:1;min-width:0;border:1px solid #EFE6D2;background:var(--paper);border-radius:20px;
+  padding:10px 14px;font-size:14px;outline:none}
+.chat-input input:focus{border-color:#D9C9A6}
+.chat-input button{width:40px;height:40px;border-radius:50%;background:var(--red);color:#fff;flex-shrink:0;
+  font-size:15px}
+
+/* ===== 路线 ===== */
+.picker{display:flex;gap:8px;padding:14px}
+.picker select{flex:1;appearance:none;background:#fff;border:1px solid #EFE6D2;border-radius:10px;
+  padding:9px 12px;font-size:13.5px;color:var(--ink);outline:none}
+.gen-btn{display:block;width:calc(100% - 28px);margin:0 14px 14px;padding:12px;border-radius:12px;
+  background:var(--teal);color:#fff;font-size:14.5px;font-weight:600;text-align:center}
+.gen-btn:active{transform:scale(.99);background:#276056}
+.route{margin:0 14px 16px;background:#fff;border:1px solid #F0E7D4;border-radius:var(--r);padding:14px;
+  box-shadow:0 2px 10px rgba(43,43,43,.05)}
+.route h4{margin:0 0 3px;font-size:15.5px}
+.route .rmeta{font-size:11.5px;color:#8B8378;margin-bottom:10px}
+.timeline{position:relative;padding-left:20px}
+.timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:8px;width:2px;background:var(--paper-3)}
+.stop{position:relative;padding:0 0 14px}
+.stop::before{content:"";position:absolute;left:-19px;top:6px;width:9px;height:9px;border-radius:50%;
+  background:#fff;border:2px solid var(--red)}
+.stop h5{margin:0 0 2px;font-size:14px;font-weight:600}
+.stop p{margin:0;font-size:12.5px;color:#7C756A;line-height:1.6}
+.stop .time{font-size:11px;color:var(--teal);margin-top:3px}
+.peak{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:8px;background:#FBEDE9;
+  color:var(--red);margin-left:6px}
+
+/* ===== 护照 ===== */
+.passport{margin:14px;background:linear-gradient(160deg,#8E2A1F,#B93A2B 55%,#C8493A);border-radius:16px;
+  padding:16px;color:#fff;position:relative;overflow:hidden}
+.passport::after{content:"郵";position:absolute;right:-6px;bottom:-28px;font-size:120px;opacity:.1;
+  font-family:serif}
+.passport h3{margin:0 0 4px;font-size:17px}
+.passport .psub{font-size:12px;opacity:.85;margin-bottom:12px}
+.progbar{height:6px;border-radius:4px;background:rgba(255,255,255,.25);overflow:hidden}
+.progbar i{display:block;height:100%;width:0;background:#fff;transition:width .3s}
+.prog-num{font-size:12px;margin-top:8px;opacity:.9}
+.stamps{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:0 14px 14px}
+.stamp{background:#fff;border:1px solid #F0E7D4;border-radius:11px;padding:6px 4px;text-align:center;
+  position:relative;overflow:hidden}
+.stamp .s-ico{width:100%;aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--paper-3);
+  display:flex;align-items:center;justify-content:center;font-size:20px}
+.stamp .s-ico img{width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(.92) brightness(1.06);opacity:.42;
+  transition:filter .45s ease,opacity .45s ease,transform .45s ease}
+.stamp.got .s-ico img{filter:none;opacity:1;transform:scale(1.02)}
+.stamp.got{border-color:var(--red);box-shadow:0 0 0 2px rgba(185,58,43,.12)}
+/* 勾选标记压在图片区右上角：之前贴在卡片 top:2px，和邮戳图形顶部的橙色圆点叠在一起，
+   看着像"多了一个点"。往内收 6px、加白描边，跟彩色邮戳区分开 */
+.stamp.got::after{content:"✓";position:absolute;right:6px;top:8px;font-size:11px;color:#fff;
+  background:var(--red);border:1.5px solid #fff;border-radius:50%;
+  width:16px;height:16px;line-height:14px;box-shadow:0 1px 3px rgba(0,0,0,.22)}
+.stamp.preview .s-ico img{filter:grayscale(.55) contrast(1);opacity:.8}
+.stamp.preview{border-style:dashed;border-color:var(--gold)}
+.stamp.preview::after{content:"预览";position:absolute;right:6px;top:8px;font-size:9px;color:#fff;
+  background:var(--gold);border-radius:8px;padding:0 4px;line-height:14px}
+.stamp span{display:block;font-size:11.5px;margin-top:4px;color:var(--ink-2);line-height:1.35;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stamp.got span{color:var(--red);font-weight:600}
+
+/* 运河邮路 · 真实地图 */
+.road{margin:0 14px 6px;border-radius:var(--r);overflow:hidden;background:#14342F;position:relative;
+  aspect-ratio:4/3.15;touch-action:none;user-select:none;-webkit-user-select:none;
+  border:1px solid rgba(20,52,47,.14);box-shadow:0 6px 18px rgba(20,52,47,.14)}
+.road canvas{display:block;width:100%;height:100%;cursor:grab}
+.road canvas:active{cursor:grabbing}
+.road-tip{margin:0 14px 14px;font-size:11px;color:#8B8378;text-align:center}
+
+/* 地图 HUD */
+.yx-map{position:relative;overflow:hidden;background:#0C2622}
+.yx-map-hud{position:absolute;left:10px;top:9px;pointer-events:none}
+.yx-map-count{display:inline-block;font-size:11px;font-weight:600;color:#FFE7C4;
+  background:rgba(12,26,23,.74);border:1px solid rgba(201,154,63,.38);
+  padding:3px 9px;border-radius:999px;backdrop-filter:blur(3px)}
+.yx-map-ctrl{position:absolute;right:9px;top:9px;display:flex;flex-direction:column;gap:5px}
+.yx-map-ctrl button{width:27px;height:27px;border-radius:8px;font-size:13px;line-height:1;
+  color:#F2EADA;background:rgba(12,26,23,.72);border:1px solid rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px);
+  transition:background .15s}
+.yx-map-ctrl button:active{background:rgba(201,154,63,.55)}
+.yx-map-ctrl button[data-act="2d"]{font-size:10.5px;font-weight:700}
+.yx-map-badge{position:absolute;right:9px;bottom:8px;font-size:9.5px;color:rgba(255,255,255,.72);
+  background:rgba(12,26,23,.72);padding:2px 7px;border-radius:6px;pointer-events:none;
+  max-width:calc(100% - 88px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ===== FAQ ===== */
+.faq-cats{display:flex;gap:7px;overflow-x:auto;padding:14px;scrollbar-width:none}
+.faq-cats::-webkit-scrollbar{display:none}
+.faq-cats button{flex:0 0 auto;font-size:12.5px;padding:6px 12px;border-radius:20px;background:#fff;
+  border:1px solid #EFE6D2;color:var(--ink-2)}
+.faq-cats button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.faq{margin:0 14px 9px;background:#fff;border:1px solid #F0E7D4;border-radius:11px;overflow:hidden}
+.faq summary{padding:12px 13px;font-size:14px;font-weight:500;list-style:none;display:flex;gap:8px;align-items:flex-start}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q";color:var(--red);font-weight:700;font-size:12px;margin-top:2px}
+.faq .a{padding:0 13px 12px 27px;font-size:13px;color:#5A554E;line-height:1.75}
+.faq .a .src{display:block;font-size:10.5px;color:#B4ADA2;margin-top:5px}
+
+/* 商户工具卡 */
+.tool{margin:0 14px 12px;background:#fff;border:1px solid #F0E7D4;border-radius:var(--r);padding:13px}
+.tool h4{margin:0 0 4px;font-size:14.5px}
+.tool .tsub{font-size:11.5px;color:#8B8378;margin-bottom:9px}
+.tool select{width:100%;appearance:none;background:var(--paper);border:1px solid #EFE6D2;border-radius:9px;
+  padding:8px 11px;font-size:13px;margin-bottom:9px;outline:none}
+.tool .gen2{width:100%;padding:10px;border-radius:10px;background:var(--gold);color:#fff;font-size:13.5px;
+  font-weight:600;text-align:center}
+.tool .out{margin-top:10px;font-size:13px;line-height:1.8;color:#3A3733}
+.tool .out .line{padding:8px 10px;background:var(--paper);border-radius:9px;margin-bottom:7px;position:relative}
+.tool .out .line .cp{position:absolute;right:8px;top:6px;font-size:10.5px;color:var(--teal)}
+.tool .ai-note{font-size:10.5px;color:#B4ADA2;margin-top:6px;line-height:1.6}
+
+/* ===== 景区门票（暂未开放） ===== */
+.tk-card{margin:0 14px 10px;background:#fff;border:1px solid #F0E7D4;border-radius:var(--r);padding:12px 13px}
+.tk-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tk-top b{font-size:14.5px}
+.tk-price{font-size:13px;color:var(--red);font-weight:600;white-space:nowrap}
+.tk-price.free{color:var(--teal)}
+.tk-meta{font-size:11.5px;color:#8B8378;margin-top:4px}
+.tk-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;
+  padding-top:9px;border-top:1px dashed #EFE6D2}
+.tk-tag{font-size:11px;color:#B4ADA2}
+.tk-btn{padding:6px 16px;border-radius:999px;background:var(--paper-2);color:#A79E90;
+  font-size:12.5px;font-weight:600;cursor:not-allowed}
+.tk-note{margin:4px 14px 0;padding:11px 13px;background:rgba(201,154,63,.09);border:1px solid rgba(201,154,63,.24);
+  border-radius:11px;font-size:11.5px;line-height:1.75;color:#8A7241}
+
+/* 返回条（讲解 / 路线这类二级页） */
+.backbar{display:flex;align-items:center;gap:10px;padding:10px 14px 2px;font-size:12px;color:#9A9186}
+.backbar button{font-size:13px;color:var(--ink-2);padding:2px 0}
+.backbar span{flex:1;text-align:right;font-size:11px;color:#B4ADA2}
+
+/* 首页路线 CTA */
+.route-cta{display:flex;align-items:center;gap:11px;margin:12px 14px 2px;padding:12px 13px;
+  background:linear-gradient(100deg,#8E2A1F,#B93A2B);border-radius:var(--r);color:#fff}
+.route-cta .rc-ico{font-size:19px}
+.route-cta .rc-txt{flex:1;min-width:0}
+.route-cta .rc-txt b{display:block;font-size:13.5px}
+.route-cta .rc-txt span{display:block;font-size:10.5px;opacity:.82;margin-top:1px}
+.route-cta .rc-arrow{font-size:20px;opacity:.6}
+.route-cta:active{filter:brightness(.94)}
+
+/* ===== 详情滑入层（吃/住/行/非遗） ===== */
+.sheet.detail .panel{max-height:82vh;display:flex;flex-direction:column;padding-top:14px}
+.d-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;
+  padding-bottom:9px;border-bottom:1px solid #F0E7D4;flex-shrink:0}
+.d-head h3{margin:0;font-size:15.5px}
+.d-close{width:26px;height:26px;border-radius:50%;background:var(--paper-2);color:#877E72;
+  font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.d-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+.d-card{background:#fff;border:1px solid #F0E7D4;border-radius:12px;padding:11px 12px;margin-bottom:9px}
+.d-card-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.d-card-h b{font-size:14px}
+.d-price{font-size:12.5px;color:var(--red);font-weight:600;white-space:nowrap}
+.d-tag{display:inline-block;font-size:10px;color:var(--teal);background:rgba(47,110,99,.09);
+  border-radius:5px;padding:1px 6px;margin-top:4px}
+.d-desc{font-size:12.5px;color:#5A554E;line-height:1.7;margin-top:5px}
+.d-line{font-size:11.5px;color:#6B655C;line-height:1.7;margin-top:4px;display:flex;gap:6px}
+.d-line i{flex-shrink:0;font-style:normal;color:#A79E90;font-size:10.5px;min-width:26px;padding-top:1px}
+.d-line.ok i{color:#4E8F72}
+.d-line.warn i{color:#B98A2B}
+.d-line.q i{color:var(--red)}
+.d-a{margin-top:6px;padding:8px 10px;background:var(--paper);border-radius:8px;
+  font-size:12.5px;line-height:1.8;color:#3A3733}
+.d-src{margin-top:6px;font-size:10px;color:#B4ADA2;line-height:1.6}
+.d-ul{margin:6px 0 0;padding-left:17px;font-size:12px;color:#5A554E;line-height:1.85}
+.d-note{margin:2px 0 8px;padding:9px 11px;background:rgba(201,154,63,.08);
+  border:1px solid rgba(201,154,63,.22);border-radius:9px;font-size:11px;line-height:1.7;color:#8A7241}
+
+/* ===== 弹层 / toast ===== */
+.toast{position:fixed;left:50%;top:22%;transform:translate(-50%,-8px);background:rgba(43,43,43,.92);
+  color:#fff;font-size:13px;padding:10px 15px;border-radius:10px;max-width:78%;text-align:center;
+  line-height:1.55;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:99}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.sheet{position:fixed;inset:0;background:rgba(20,18,16,.5);display:none;align-items:flex-end;z-index:90}
+.sheet.show{display:flex}
+.sheet .panel{width:100%;background:#fff;border-radius:18px 18px 0 0;padding:18px 16px
+  calc(18px + var(--safe-b));max-width:520px;margin:0 auto}
+.sheet h3{margin:0 0 4px;font-size:16px}
+.sheet p{margin:0 0 12px;font-size:12.5px;color:#8B8378;line-height:1.6}
+.sheet input{width:100%;border:1px solid #EFE6D2;border-radius:10px;padding:11px 13px;font-size:14px;
+  outline:none;margin-bottom:10px;background:var(--paper)}
+.sheet .row{display:flex;gap:9px}
+.sheet .row button{flex:1;padding:11px;border-radius:10px;font-size:14px;text-align:center}
+.sheet .primary{background:var(--red);color:#fff;font-weight:600}
+.sheet .ghost{background:var(--paper);color:var(--ink-2)}
+.sheet .kv{font-size:12px;color:#8B8378;line-height:1.9;margin-bottom:10px}
+.sheet .kv b{color:var(--ink)}
+
+/* 降级横条 */
+.banner{display:none;position:absolute;left:0;right:0;top:0;z-index:30;
+  background:#FDECEA;color:#8E2A1F;font-size:12px;padding:7px 14px;text-align:center;
+  border-bottom:1px solid #F3D7D2}
+.banner.show{display:block}
+.hero .intro-line.playing{background:rgba(0,0,0,.26)}
+.hero .intro-line.playing .play{background:#FFE9E3}
+
+/* ===== 桌面：>=500px 恢复手机壳 ===== */
+@media (min-width:500px){
+  body{display:flex;flex-direction:column;align-items:center;padding:26px 16px 40px;overflow:auto;
+    background:radial-gradient(90% 70% at 50% 0%,#FBF6EA,#EDE3CE)}
+  .phone{width:390px;height:780px;padding:12px;border-radius:46px;background:#111;
+    box-shadow:var(--shadow);flex-shrink:0}
+  .screen{border-radius:36px}
+  .statusbar{display:flex;align-items:center;justify-content:space-between;height:30px;padding:0 22px;
+    font-size:11.5px;color:var(--ink);flex-shrink:0;font-weight:600}
+  .page-head{display:block;text-align:center;margin-bottom:14px;color:var(--ink-2);font-size:12.5px}
+  .page-head b{display:block;color:var(--ink);font-size:15px;margin-bottom:2px}
+  .qr-line{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:11px;color:#8B8378}
+  .qr-line img{width:84px;height:84px;border:4px solid #fff;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .tabbar{border-radius:0 0 36px 36px}
+  .toast{position:absolute;max-width:70%}
+  .sheet{position:fixed}
+}
+@media (min-width:500px){
+  .app-wrap{display:flex;flex-direction:column;align-items:center}
+}
+
+/* ===== 到达与停车（原型） ===== */
+.park{padding:0 14px 14px}
+.park-h{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.park-h b{font-size:13.5px;color:var(--ink);font-weight:600}
+.park-tag{font-size:10.5px;color:#8A7A5E;background:var(--paper-2);border-radius:999px;padding:2px 8px}
+.park-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:7px}
+.park-btn{display:flex;align-items:center;justify-content:center;height:38px;border-radius:10px;
+  background:var(--teal);color:#fff;font-size:12.5px;text-align:center;text-decoration:none;padding:0 6px}
+.park-btn.ghost2{background:var(--paper-2);color:var(--ink-2);border:1px solid var(--paper-3);width:auto;padding:0 10px}
+.park-btn:active{opacity:.86}
+.park-note{margin-top:9px;font-size:10.5px;line-height:1.7;color:#9A9288}
+
+/* ===== 气泡动作按钮（诉求单号/导出） ===== */
+.msg .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.msg .act{font-size:11.5px;color:var(--teal);border:1px solid #D8E4DE;background:#fff;
+  border-radius:999px;padding:4px 10px}
+.msg .act:active{background:#F1F6F3}

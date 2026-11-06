@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="净土寺塔">
+<defs>
+  <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+    <rect width="6" height="6" fill="#F7F1E5"/>
+    <circle cx="1" cy="1" r="0.55" fill="#EFE6D2"/>
+    <circle cx="4" cy="4" r="0.5" fill="#EFE6D2"/>
+  </pattern>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F7F1E5" stop-opacity="0"/>
+    <stop offset="1" stop-color="#EFE6D2" stop-opacity=".9"/>
+  </linearGradient>
+</defs>
+<rect width="800" height="600" fill="url(#grain)"/>
+<rect width="800" height="600" fill="url(#sky)"/>
+<g stroke="#2B2B2B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+<path d="M40 452 H760" stroke="#2F6E63" stroke-width="2.5" opacity=".35"/>
+<rect x="300" y="372" width="200" height="34" fill="#EFE6D2"/>
+<path d="M288 376 q40.0 -12 100.0 -12 q60.0 0 100.0 12" stroke-width="3"/>
+<rect x="316" y="330" width="168" height="34" fill="#EFE6D2"/>
+<path d="M304 334 q33.6 -12 84.0 -12 q50.4 0 84.0 12" stroke-width="3"/>
+<rect x="332" y="292" width="136" height="34" fill="#EFE6D2"/>
+<path d="M320 296 q27.200000000000003 -12 68.0 -12 q40.8 0 68.0 12" stroke-width="3"/>
+<rect x="348" y="258" width="112" height="34" fill="#EFE6D2"/>
+<path d="M336 262 q22.400000000000002 -12 56.0 -12 q33.6 0 56.0 12" stroke-width="3"/>
+<rect x="362" y="228" width="92" height="34" fill="#EFE6D2"/>
+<path d="M350 232 q18.400000000000002 -12 46.0 -12 q27.599999999999998 0 46.0 12" stroke-width="3"/>
+<rect x="374" y="200" width="74" height="34" fill="#EFE6D2"/>
+<path d="M362 204 q14.8 -12 37.0 -12 q22.2 0 37.0 12" stroke-width="3"/>
+<rect x="384" y="176" width="58" height="24" fill="#EFE6D2"/>
+<path d="M372 180 q11.600000000000001 -12 29.0 -12 q17.4 0 29.0 12" stroke-width="3"/>
+<rect x="392" y="156" width="44" height="24" fill="#EFE6D2"/>
+<path d="M380 160 q8.8 -12 22.0 -12 q13.2 0 22.0 12" stroke-width="3"/>
+<path d="M400 156 v-46" stroke-width="4"/>
+<circle cx="400" cy="102" r="9" fill="#C99A3F" stroke="#3A3733" stroke-width="2.5"/>
+<path d="M286 406 h228 v46 h-228 Z" fill="#EFE6D2"/>
+<path d="M262 452 h276" stroke-width="3"/>
+<path d="M600 452 v-70 M600 396 q30 -26 54 -6 M600 416 q-32 -26 -56 -4" stroke-width="3"/>
+<path d="M120 452 v-58 M120 410 q-28 -24 -50 -4" stroke-width="3" opacity=".7"/>
+</g>
+<g opacity=".9">
+  <rect x="676" y="500" width="76" height="76" rx="6" fill="#B93A2B"/>
+  <rect x="686" y="510" width="56" height="56" rx="3" fill="none" stroke="#F7F1E5" stroke-width="2.5"/>
+  <text x="714" y="548" font-size="30" text-anchor="middle" fill="#F7F1E5"
+        font-family="STKaiti, KaiTi, serif">東</text>
+</g>
+<text x="40" y="556" font-size="21" fill="#3A3733" opacity=".55"
+      font-family="STKaiti, KaiTi, serif">邮小驿 · 净土寺塔</text>
+<text x="40" y="582" font-size="15" fill="#3A3733" opacity=".35"
+      font-family="system-ui, sans-serif">原创矢量插画 / 非实景照片</text>
+</svg>
