@@ -25,7 +25,10 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP = os.path.join(ROOT, "app")
-OUT_DIR = os.path.join(ROOT, "交付")
+# 交付目录固定在工作区根 /workspace/交付 —— 那是用户能看见的地方。
+# 曾经写成 ROOT/交付，结果仓库里和 workspace 下各有一份产物，
+# 改了源码只更新了仓库那份，用户打开的却是旧的。一个路径只能有一个真身。
+OUT_DIR = os.path.join(os.path.dirname(ROOT), "交付")
 
 MIME = {
     ".webp": "image/webp",
