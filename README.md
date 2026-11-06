@@ -140,4 +140,4 @@ python3 tools/build.py
 
 ## 许可证
 
-代码部分为 [MIT](LICENSE)。**素材不适用 MIT**：`app/assets/` 下的实景照片与 5 段录音尚未取得书面授权，仅随本作品用于大赛非商业演示；插画与邮戳为团队原创。详见 [app/CREDITS.md](app/CREDITS.md)。
+代码部分为 [MIT](LICENSE)。**素材不适用 MIT**：`app/assets/` 下的实景照片与 5 段录音尚未取得书面授权，仅随本作品用于大赛非商业演示；插画与邮戳为团队原创。详见 [素材声明](素材声明.md) 与 [app/CREDITS.md](app/CREDITS.md)。

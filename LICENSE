@@ -19,14 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----------------------------------------------------------------
-注意：上述 MIT 许可仅覆盖代码（app/、tools/ 下的源码）。
-
-素材不适用 MIT：
-  - app/assets/ 下的实景照片与 5 段团队录音：尚未取得权利人书面授权，
-    仅随本作品用于大赛非商业演示，不得再分发或商用。
-  - 景点文案与数据：整理自高邮市政府、文旅局及景区官方公开资料，
-    引用注明出处，商用需另行取得授权。
-  - 插画与数字邮戳（团队原创）：可随代码一同使用，保留署名。
-详见 app/CREDITS.md。
