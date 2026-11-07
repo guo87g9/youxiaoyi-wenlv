@@ -1,6 +1,7 @@
 /* 邮小驿 · 数据层（唯一数据源）
  * 说明：全部数据集中在此，页面只读不写；换图/换音频只需改这里或替换同名文件。
- * 图片：实景照来自官方媒体公开报道配图（见 CREDITS），插画为原创矢量图。
+ * 图片：17 个点位全部为实景照（用户提供，见 CREDITS 与 素材声明.md），逐张标注来源；
+ *      原创矢量插画保留在 illus 子目录作备份，页面不再引用。
  */
 window.YXY = {
   meta: {
@@ -18,55 +19,128 @@ window.YXY = {
   },
 
   /* 图片授权：实景照来源与协议（逐张可回溯） */
+  /* 图片授权：17 张实景照均为用户提供，来源逐张可回溯（2026-11-07 更新）
+   * 说明：本组图片取自公开网页，版权归原作者/机构所有；仅用于本次大赛非商业展示，
+   *      商用（APP/小程序/宣传物料）须另行取得授权或替换为官方图库/自拍素材。 */
   credit: {
-    c_ycy: {
+    c_yuchengyi: {
       file: "yuchengyi-800.webp", spot: "盂城驿",
-      author: "高邮市融媒体中心（今日高邮）",
-      license: "官方媒体公开报道配图",
-      src: "http://www.gytoday.cn/yw/2022-08-11/84986.html",
-      note: "仅用于本次大赛非商业展示，已标注来源；商用需另行取得授权"
+      author: "用户实拍（百度图片 UGC）",
+      license: "用户实拍照片",
+      src: "http://b0.bdstatic.com/ugc/TNNv2t3N_OZKRE3lu29amw2611e6b89a398629ac82b9e952c70405.jpg",
+      note: "盂城驿鼓楼与南门大街街景"
     },
-    c_zgs: {
+    c_zhenguosi: {
       file: "zhenguosi-800.webp", spot: "镇国寺塔",
-      author: "高邮市融媒体中心（今日高邮）",
-      license: "官方媒体公开报道配图",
-      src: "https://www.gytoday.cn/mc/2018-12-23/67469.html",
-      note: "已裁去版面装饰边与水印，仅保留塔身与台基"
+      author: "新浪图片",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://n.sinaimg.cn/sinakd20108/0/w2048h1152/20250827/3437-447e509d05df365e13685b2c5b57a138.jpg",
+      note: "运河河心岛航拍，原图 2048×1152，本项目所得副本为 448×335"
     },
-    c_wyt: {
+    c_wenyoutai: {
       file: "wenyoutai-800.webp", spot: "文游台",
+      author: "百度图片 feed",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://se-feed-bucket.bj.bcebos.com/002b10d619773937fe060d57c1033ac1",
+      note: "文游台石牌坊正面"
+    },
+    c_dangpu: {
+      file: "dangpu-800.webp", spot: "高邮当铺",
+      author: "图虫摄影社区（摄影师作品）",
+      license: "商业图库作品，版权归摄影师",
+      src: "http://photo.tuchong.com/8962470/f/432372968.jpg",
+      note: "同兴当铺门楼「高郵同興當」；图虫为摄影师版权作品，商用须单独授权"
+    },
+    c_jingtusi: {
+      file: "jingtusi-800.webp", spot: "净土寺塔",
+      author: "百度图片",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://gips0.baidu.com/it/u=137148568,2814440626&fm=3074&app=3074&f=JPEG",
+      note: "净土寺塔（东塔）塔身与塔院"
+    },
+    c_kuilou: {
+      file: "kuilou-800.webp", spot: "奎楼",
       author: "高邮市融媒体中心（今日高邮）",
       license: "官方媒体公开报道配图",
-      src: "http://www.gytoday.cn/yw/2023-02-22/87130.html",
-      note: "文游台山门「淮堧名胜」与秦观像"
+      src: "http://f.gytoday.cn/p/2025/04-17/2063a863e0601e7610a0a6c58297ce09.jpg",
+      note: "奎楼与护城河；原图 740×440，为本组分辨率最低"
     },
-    c_wzq: {
+    c_longqiuzhuang: {
+      file: "longqiuzhuang-800.webp", spot: "龙虬庄遗址",
+      author: "百度百科",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://bkimg.cdn.bcebos.com/pic/8b13632762d0f7032e6aca820cfa513d2797c590",
+      note: "龙虬庄遗址木构门楼"
+    },
+    c_wangshi: {
+      file: "wangshi-800.webp", spot: "王氏纪念馆",
+      author: "百度图片 feed",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://se-feed-bucket.bj.bcebos.com/3df15a349bc562df78dfd1663ca97611",
+      note: "王氏纪念馆门楼；原图 448×277"
+    },
+    c_kangzhan: {
+      file: "kangzhan-800.webp", spot: "抗战最后一役文化园",
+      author: "百度图片 feed",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://pics7.baidu.com/feed/fd039245d688d43f0fadd634e09bea0b0ff43b01.jpeg",
+      note: "纪念馆前红色主题雕塑"
+    },
+    c_wangzengqi: {
       file: "wangzengqi-800.webp", spot: "汪曾祺纪念馆",
-      author: "高邮市融媒体中心（今日高邮）",
-      license: "官方媒体公开报道配图",
-      src: "http://www.gytoday.cn/yw/2020-05-06/74496.html",
-      note: "馆内展陈现场"
+      author: "百度图片",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://b0.bdstatic.com/ugc/TNNv2t3N_OZKRE3lu29amwa358b6817bef9394507c54c8265fb8d1.jpg",
+      note: "纪念馆外立面；原图 448×335"
     },
-    c_nmj: {
-      file: "nanmen-800.webp", spot: "南门大街",
-      author: "高邮市融媒体中心（今日高邮）",
-      license: "官方媒体公开报道配图",
-      src: "https://www.gytoday.cn/tb/2024-01-21/91041.html",
-      note: ""
+    c_jiyoujia: {
+      file: "jiyoujia-800.webp", spot: "中国集邮家博物馆",
+      author: "百度百科",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://bkimg.cdn.bcebos.com/pic/810a19d8bc3eb13533fab75fc647bfd3fd1f4034ee84",
+      note: "馆前题名石；原图 671×503"
     },
-    c_xidi: {
-      file: "yunhexidi-800.webp", spot: "运河西堤",
-      author: "高邮市融媒体中心（今日高邮）",
-      license: "官方媒体公开报道配图",
-      src: "http://www.gytoday.cn/tb/2022-06-14/84277.html",
-      note: "大运河高邮段与镇国寺河心岛航拍"
+    c_museum: {
+      file: "museum-800.webp", spot: "高邮市博物馆",
+      author: "百度百科",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://bkimg.cdn.bcebos.com/pic/4afbfbedab64034f78f0b5b335926e310a55b319b77f",
+      note: "博物馆正立面"
     },
-    c_gyh: {
+    c_gaoyouhu: {
       file: "gaoyouhu-800.webp", spot: "高邮湖",
-      author: "江苏省广播电视总台（我苏网）",
-      license: "官方媒体公开报道配图",
-      src: "https://www.ourjiangsu.com/a/20211210/1639108718959.shtml",
-      note: "高邮湖与运河航拍"
+      author: "百度图片",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://gips1.baidu.com/it/u=595969559,2265696325&fm=3074&app=3074&f=JPEG",
+      note: "高邮湖日落与湖面渔船"
+    },
+    c_huahai: {
+      file: "huahai-800.webp", spot: "湖上花海",
+      author: "搜狐图片",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://q9.itc.cn/images01/20260409/7e67fc7e87334ef3bec2dd7145ec6c56.jpeg",
+      note: "油菜花田航拍"
+    },
+    c_yunhexidi: {
+      file: "yunhexidi-800.webp", spot: "运河西堤",
+      author: "百度图片 feed",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://pics7.baidu.com/feed/f603918fa0ec08faabfc6023625c887d57fbdafd.jpeg",
+      note: "运河西堤公园水岸"
+    },
+    c_nanmen: {
+      file: "nanmen-800.webp", spot: "南门大街",
+      author: "百度图片",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://gips1.baidu.com/it/u=156806554,3385650321&fm=3074&app=3074&f=JPEG",
+      note: "南门大街牌楼；原图 800×500"
+    },
+    c_beimendajie: {
+      file: "beimendajie-800.webp", spot: "北门大街",
+      author: "百度图片 feed",
+      license: "公开网络图片（版权归原作者）",
+      src: "http://pics4.baidu.com/feed/9e3df8dcd100baa1c9b254bfb3021f1dc8fc2e3d.jpeg",
+      note: "北门大街牌坊与街景；原图 448×252"
     }
   },
 
@@ -148,7 +222,7 @@ window.YXY = {
       id: "yuchengyi", name: "盂城驿", short: "盂城驿", cat: "hist",
       desc: "明代驿站 · 全国规模最大、保存最完好",
       img: "assets/img/photo/yuchengyi-800.webp", thumb: "assets/img/photo/yuchengyi-400.webp",
-      stampImg: "assets/img/stamp/yuchengyi-stamp.webp", credit: "c_ycy",
+      stampImg: "assets/img/stamp/yuchengyi-stamp.webp", credit: "c_yuchengyi",
       geo: { lat: 32.7727, lng: 119.43354, crs: "WGS84", confidence: "high" },
       aliases: ["盂城驿", "驿站", "邮驿", "古驿站", "孟城驿", "鼓楼", "皇华厅", "马神庙", "驻节堂"],
       audio: "yuchengyi", heat: 92, ticket: "25 元（学生半价）", hours: "08:15 - 17:30",
@@ -160,7 +234,7 @@ window.YXY = {
       id: "zhenguosi", name: "镇国寺塔", short: "镇国寺塔", cat: "hist",
       desc: "唐代方形砖塔 · 俗称「西塔」，运河河心岛",
       img: "assets/img/photo/zhenguosi-800.webp", thumb: "assets/img/photo/zhenguosi-400.webp",
-      stampImg: "assets/img/stamp/zhenguosi-stamp.webp", credit: "c_zgs",
+      stampImg: "assets/img/stamp/zhenguosi-stamp.webp", credit: "c_zhenguosi",
       geo: { lat: 32.77499, lng: 119.42585, crs: "WGS84", confidence: "high" },
       aliases: ["镇国寺", "镇国寺塔", "西塔", "河心塔", "南方大雁塔", "运河里的塔", "唐塔"],
       audio: "zhenguosi", heat: 78, ticket: "免费（登岛另计）", hours: "08:00 - 17:00",
@@ -172,7 +246,7 @@ window.YXY = {
       id: "wenyoutai", name: "文游台", short: "文游台", cat: "hist",
       desc: "北宋文脉 · 苏轼与秦观雅集之地",
       img: "assets/img/photo/wenyoutai-800.webp", thumb: "assets/img/photo/wenyoutai-400.webp",
-      stampImg: "assets/img/stamp/wenyoutai-stamp.webp", credit: "c_wyt",
+      stampImg: "assets/img/stamp/wenyoutai-stamp.webp", credit: "c_wenyoutai",
       geo: { lat: 32.7966, lng: 119.4422, crs: "WGS84", confidence: "high" },
       aliases: ["文游台", "文游", "秦观", "四贤祠", "盍簪堂", "淮堧名胜", "泰山庙"],
       audio: "wenyoutai", heat: 66, ticket: "免费", hours: "08:30 - 17:00",
@@ -183,8 +257,8 @@ window.YXY = {
     {
       id: "dangpu", name: "高邮当铺", short: "当铺", cat: "hist",
       desc: "清代同兴当铺 · 保存完整的当铺建筑群",
-      img: "assets/img/illus/dangpu.svg", thumb: "assets/img/illus/dangpu.svg",
-      stampImg: "assets/img/illus/dangpu.svg", credit: "illus",
+      img: "assets/img/photo/dangpu-800.webp", thumb: "assets/img/photo/dangpu-400.webp",
+      stampImg: "assets/img/stamp/dangpu-stamp.webp", credit: "c_dangpu",
       geo: { lat: 32.7936, lng: 119.42827, crs: "WGS84", confidence: "high" },
       aliases: ["当铺", "高邮当铺", "同兴当铺", "典当", "老当铺"],
       audio: null, heat: 48, ticket: "含盂城驿联票", hours: "08:30 - 17:00",
@@ -195,8 +269,8 @@ window.YXY = {
     {
       id: "jingtusi", name: "净土寺塔（东塔）", short: "净土寺塔", cat: "hist",
       desc: "明代七层砖塔 · 俗称「东塔」",
-      img: "assets/img/illus/jingtusi.svg", thumb: "assets/img/illus/jingtusi.svg",
-      stampImg: "assets/img/illus/jingtusi.svg", credit: "illus",
+      img: "assets/img/photo/jingtusi-800.webp", thumb: "assets/img/photo/jingtusi-400.webp",
+      stampImg: "assets/img/stamp/jingtusi-stamp.webp", credit: "c_jingtusi",
       geo: { lat: 32.77523, lng: 119.44215, crs: "WGS84", confidence: "medium" },
       aliases: ["净土寺", "净土寺塔", "东塔", "净土寺塔广场"],
       audio: null, heat: 42, ticket: "免费（外围广场）", hours: "全天（广场）",
@@ -207,8 +281,8 @@ window.YXY = {
     {
       id: "kuilou", name: "奎楼·宋城墙", short: "奎楼", cat: "hist",
       desc: "宋代城墙遗存 · 明代奎星楼",
-      img: "assets/img/illus/kuilou.svg", thumb: "assets/img/illus/kuilou.svg",
-      stampImg: "assets/img/illus/kuilou.svg", credit: "illus",
+      img: "assets/img/photo/kuilou-800.webp", thumb: "assets/img/photo/kuilou-400.webp",
+      stampImg: "assets/img/stamp/kuilou-stamp.webp", credit: "c_kuilou",
       geo: { lat: 32.77678, lng: 119.43712, crs: "WGS84", confidence: "medium" },
       aliases: ["奎楼", "魁楼", "宋城墙", "城墙", "奎星阁"],
       audio: null, heat: 36, ticket: "免费", hours: "全天（外景）",
@@ -219,8 +293,8 @@ window.YXY = {
     {
       id: "longqiuzhuang", name: "龙虬庄遗址", short: "龙虬庄", cat: "hist",
       desc: "新石器时代遗址 · 出土炭化稻米",
-      img: "assets/img/illus/longqiuzhuang.svg", thumb: "assets/img/illus/longqiuzhuang.svg",
-      stampImg: "assets/img/illus/longqiuzhuang.svg", credit: "illus",
+      img: "assets/img/photo/longqiuzhuang-800.webp", thumb: "assets/img/photo/longqiuzhuang-400.webp",
+      stampImg: "assets/img/stamp/longqiuzhuang-stamp.webp", credit: "c_longqiuzhuang",
       geo: { lat: 32.83183, lng: 119.50792, crs: "WGS84", confidence: "high" },
       aliases: ["龙虬庄", "龙虬", "龙虬庄遗址", "遗址", "新石器", "稻米遗址"],
       audio: null, heat: 30, ticket: "免费（遗址公园）", hours: "09:00 - 16:30",
@@ -231,8 +305,8 @@ window.YXY = {
     {
       id: "wangshi", name: "王氏纪念馆", short: "王氏纪念馆", cat: "hist",
       desc: "清代训诂学大家王念孙、王引之父子故居",
-      img: "assets/img/illus/wangshi.svg", thumb: "assets/img/illus/wangshi.svg",
-      stampImg: "assets/img/illus/wangshi.svg", credit: "illus",
+      img: "assets/img/photo/wangshi-800.webp", thumb: "assets/img/photo/wangshi-400.webp",
+      stampImg: "assets/img/stamp/wangshi-stamp.webp", credit: "c_wangshi",
       geo: { lat: 32.77989, lng: 119.42933, crs: "WGS84", confidence: "high" },
       aliases: ["王氏", "王氏纪念馆", "王念孙", "王引之", "训诂", "广雅疏证", "经义述闻", "父子故居"],
       audio: null, heat: 28, ticket: "免费", hours: "09:00 - 17:00",
@@ -243,8 +317,8 @@ window.YXY = {
     {
       id: "kangzhan", name: "抗日战争最后一役纪念馆", short: "抗战最后一役", cat: "hist",
       desc: "1945 年高邮战役 · 抗战最后一役",
-      img: "assets/img/illus/kangzhan.svg", thumb: "assets/img/illus/kangzhan.svg",
-      stampImg: "assets/img/illus/kangzhan.svg", credit: "illus",
+      img: "assets/img/photo/kangzhan-800.webp", thumb: "assets/img/photo/kangzhan-400.webp",
+      stampImg: "assets/img/stamp/kangzhan-stamp.webp", credit: "c_kangzhan",
       geo: { lat: 32.7856, lng: 119.43078, crs: "WGS84", confidence: "medium" },
       aliases: ["抗战", "最后一役", "抗日战争最后一役", "高邮战役", "受降", "抗战馆", "胜利广场"],
       audio: null, heat: 40, ticket: "免费", hours: "09:00 - 16:30（周一闭馆）",
@@ -256,7 +330,7 @@ window.YXY = {
       id: "wangzengqi", name: "汪曾祺纪念馆", short: "汪曾祺纪念馆", cat: "museum",
       desc: "「抒情的人道主义者」· 高邮的文学名片",
       img: "assets/img/photo/wangzengqi-800.webp", thumb: "assets/img/photo/wangzengqi-400.webp",
-      stampImg: "assets/img/stamp/wangzengqi-stamp.webp", credit: "c_wzq",
+      stampImg: "assets/img/stamp/wangzengqi-stamp.webp", credit: "c_wangzengqi",
       geo: { lat: 32.79345, lng: 119.43535, crs: "WGS84", confidence: "high" },
       aliases: ["汪曾祺", "汪曾祺纪念馆", "汪曾祺馆", "受戒", "大淖记事", "汪老"],
       audio: "wangzengqi", heat: 74, ticket: "免费", hours: "09:00 - 17:00（周一闭馆）",
@@ -267,8 +341,8 @@ window.YXY = {
     {
       id: "jiyoujia", name: "中国集邮家博物馆", short: "集邮家博物馆", cat: "museum",
       desc: "全国唯一以集邮家为主题的博物馆",
-      img: "assets/img/illus/jiyoujia.svg", thumb: "assets/img/illus/jiyoujia.svg",
-      stampImg: "assets/img/illus/jiyoujia.svg", credit: "illus",
+      img: "assets/img/photo/jiyoujia-800.webp", thumb: "assets/img/photo/jiyoujia-400.webp",
+      stampImg: "assets/img/stamp/jiyoujia-stamp.webp", credit: "c_jiyoujia",
       geo: { lat: 32.77266, lng: 119.43304, crs: "WGS84", confidence: "medium" },
       aliases: ["集邮", "集邮家", "集邮家博物馆", "中国集邮家博物馆", "邮票博物馆", "大龙邮票", "集邮之乡"],
       audio: null, heat: 32, ticket: "免费", hours: "09:00 - 17:00（周一闭馆）",
@@ -279,8 +353,8 @@ window.YXY = {
     {
       id: "museum", name: "高邮博物馆", short: "高邮博物馆", cat: "museum",
       desc: "地方综合馆 · 一馆看全高邮七千年",
-      img: "assets/img/illus/museum.svg", thumb: "assets/img/illus/museum.svg",
-      stampImg: "assets/img/illus/museum.svg", credit: "illus",
+      img: "assets/img/photo/museum-800.webp", thumb: "assets/img/photo/museum-400.webp",
+      stampImg: "assets/img/stamp/museum-stamp.webp", credit: "c_museum",
       geo: { lat: 32.78041, lng: 119.46115, crs: "WGS84", confidence: "medium" },
       aliases: ["高邮博物馆", "博物馆", "市博物馆", "文博场馆"],
       audio: null, heat: 38, ticket: "免费", hours: "09:00 - 17:00（周一闭馆）",
@@ -292,7 +366,7 @@ window.YXY = {
       id: "gaoyouhu", name: "高邮湖", short: "高邮湖", cat: "nature",
       desc: "江苏第三大淡水湖 · 湖上日落",
       img: "assets/img/photo/gaoyouhu-800.webp", thumb: "assets/img/photo/gaoyouhu-400.webp",
-      stampImg: "assets/img/stamp/gaoyouhu-stamp.webp", credit: "c_gyh",
+      stampImg: "assets/img/stamp/gaoyouhu-stamp.webp", credit: "c_gaoyouhu",
       geo: { lat: 32.78688, lng: 119.42108, crs: "WGS84", confidence: "medium" },
       aliases: ["高邮湖", "湖", "大湖", "看湖", "湖边", "湖上"],
       audio: null, heat: 58, ticket: "免费", hours: "全天",
@@ -303,8 +377,8 @@ window.YXY = {
     {
       id: "huahai", name: "湖上花海", short: "湖上花海", cat: "nature",
       desc: "高邮湖畔油菜花海 · 春季限定",
-      img: "assets/img/illus/huahai.svg", thumb: "assets/img/illus/huahai.svg",
-      stampImg: "assets/img/illus/huahai.svg", credit: "illus",
+      img: "assets/img/photo/huahai-800.webp", thumb: "assets/img/photo/huahai-400.webp",
+      stampImg: "assets/img/stamp/huahai-stamp.webp", credit: "c_huahai",
       geo: { lat: 32.71608, lng: 119.40073, crs: "WGS84", confidence: "medium" },
       aliases: ["湖上花海", "花海", "油菜花", "花田", "小火车"],
       audio: null, heat: 62, ticket: "季节性售票", hours: "08:30 - 17:30（花季）",
@@ -316,7 +390,7 @@ window.YXY = {
       id: "yunhexidi", name: "运河西堤", short: "运河西堤", cat: "nature",
       desc: "大运河高邮段 · 运河故道风光带",
       img: "assets/img/photo/yunhexidi-800.webp", thumb: "assets/img/photo/yunhexidi-400.webp",
-      stampImg: "assets/img/stamp/yunhexidi-stamp.webp", credit: "c_xidi",
+      stampImg: "assets/img/stamp/yunhexidi-stamp.webp", credit: "c_yunhexidi",
       geo: { lat: 32.79675, lng: 119.42323, crs: "WGS84", confidence: "medium" },
       aliases: ["运河西堤", "西堤", "运河", "大运河", "运河边", "湖上升明月", "夜游"],
       audio: null, heat: 54, ticket: "免费", hours: "全天",
@@ -328,7 +402,7 @@ window.YXY = {
       id: "nanmen", name: "南门大街", short: "南门大街", cat: "food",
       desc: "盂城驿前老街 · 明清商业街",
       img: "assets/img/photo/nanmen-800.webp", thumb: "assets/img/photo/nanmen-400.webp",
-      stampImg: "assets/img/stamp/nanmen-stamp.webp", credit: "c_nmj",
+      stampImg: "assets/img/stamp/nanmen-stamp.webp", credit: "c_nanmen",
       geo: { lat: 32.7724, lng: 119.4319, crs: "WGS84", confidence: "high" },
       aliases: ["南门大街", "南门", "南大街", "老街", "盂城驿街区", "小吃街"],
       audio: null, heat: 76, ticket: "免费", hours: "全天（店铺 09:00-21:00）",
@@ -339,8 +413,8 @@ window.YXY = {
     {
       id: "beimendajie", name: "北门大街", short: "北门大街", cat: "food",
       desc: "老城北门 · 市井烟火气",
-      img: "assets/img/illus/beimendajie.svg", thumb: "assets/img/illus/beimendajie.svg",
-      stampImg: "assets/img/illus/beimendajie.svg", credit: "illus",
+      img: "assets/img/photo/beimendajie-800.webp", thumb: "assets/img/photo/beimendajie-400.webp",
+      stampImg: "assets/img/stamp/beimendajie-stamp.webp", credit: "c_beimendajie",
       geo: { lat: 32.7966, lng: 119.42682, crs: "WGS84", confidence: "medium" },
       aliases: ["北门大街", "北门", "北大街", "人民路"],
       audio: null, heat: 44, ticket: "免费", hours: "全天",

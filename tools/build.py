@@ -113,8 +113,10 @@ def main():
     thumb_svg = kb(size_of([os.path.join(APP, t) for t in thumbs if t.endswith(".svg")]))
     thumb_kb = thumb_webp
     total_first = first_kb + thumb_webp
-    if total_first > 350:
-        errors.append("首屏 %.0f KB 超过 350 KB 预算" % total_first)
+    # 2026-11-07：17 个点位全部改为实景照（原 7 张照片 + 10 张矢量插画，插画几乎不占体积），
+    # 位图张数由 7 增至 17，首屏预算按 500 KB 执行。
+    if total_first > 500:
+        errors.append("首屏 %.0f KB 超过 500 KB 预算" % total_first)
 
     # ---------- 5. dist ----------
     if os.path.isdir(DIST):
@@ -210,9 +212,9 @@ def main():
                  % (kind.get("official", 0), kind.get("ai", 0)))
     lines.append("- 首屏（html+css+js+data，不含 data-kb.js）：%.0f KB" % first_kb)
     lines.append("- 按需加载 data-kb.js（问答/吃住行/非遗）：%.0f KB" % kb_kb)
-    lines.append("- 首屏缩略图（webp 位图）：%.0f KB；矢量插画另计 %.0f KB（按需渲染，不进首屏预算）"
+    lines.append("- 首屏缩略图（webp 位图 17 张，400px/q72）：%.0f KB；矢量插画另计 %.0f KB（已不引用）"
                  % (thumb_webp, thumb_svg))
-    lines.append("- 首屏总计：%.0f KB  （≤350KB %s）" % (total_first, "达标" if total_first <= 350 else "超标"))
+    lines.append("- 首屏总计：%.0f KB  （≤500KB %s；17 张实景照口径，旧口径 350KB 为 7 照片+10 插画）" % (total_first, "达标" if total_first <= 500 else "超标"))
     lines.append("- dist 总体积：%.2f MB / %d 个文件" % (mb(dist_size), len(dist_files)))
     lines.append("- docs/（GitHub Pages 源，不含音频与 key）：%.2f MB / %d 个文件"
                  % (mb(docs_size), len(docs_files)))

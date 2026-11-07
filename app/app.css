@@ -48,20 +48,30 @@ body.kb-open .tabbar{display:none}
 .tab.on{color:var(--red)}
 .tab:active{background:#FBF7EE}
 
-/* ===== 首页 hero ===== */
-.hero{position:relative;padding:22px 18px 18px;background:
-  radial-gradient(120% 90% at 15% 0%, #C8493A 0%, #B93A2B 42%, #8E2A1F 100%);
+/* ===== 首页 hero =====
+ * 背景：高邮湖日落实拍（用户供图 app/assets/img/hero-sunset.webp，22 KB）。
+ * 上层叠一道暖黑遮罩：日落的天空部分是亮橙色，白字直接压上去会读不清，
+ * 遮罩把整体压暗到白色正文有足够对比度，同时保住落日和帆影的轮廓。
+ * 原 radial-gradient 留作兜底：图片加载失败时不会露出一片空白。 */
+.hero{position:relative;padding:22px 18px 18px;
+  background-color:#8E2A1F;
+  background-image:
+    linear-gradient(180deg, rgba(26,14,10,.46) 0%, rgba(26,14,10,.28) 42%, rgba(26,14,10,.58) 100%),
+    url("assets/img/hero-sunset.webp");
+  background-size:cover;
+  background-position:center 45%;
+  background-repeat:no-repeat;
   color:#fff;overflow:hidden}
-.hero::after{content:"";position:absolute;right:-40px;top:-30px;width:190px;height:190px;border-radius:50%;
-  background:rgba(255,255,255,.07)}
 .hero .seal{width:58px;height:58px;border:2px solid rgba(255,255,255,.55);border-radius:12px;
   display:flex;align-items:center;justify-content:center;font-size:27px;margin-bottom:12px}
-.hero h1{margin:0 0 6px;font-size:25px;letter-spacing:1px;font-weight:700}
-.hero p{margin:0;font-size:13.5px;opacity:.88;line-height:1.65}
+.hero h1{margin:0 0 6px;font-size:25px;letter-spacing:1px;font-weight:700;
+  text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.hero p{margin:0;font-size:13.5px;opacity:.95;line-height:1.65;
+  text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .hero .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.hero .badges span{font-size:11.5px;padding:4px 9px;border-radius:20px;background:rgba(255,255,255,.16);
+.hero .badges span{font-size:11.5px;padding:4px 9px;border-radius:20px;background:rgba(0,0,0,.18);
   border:1px solid rgba(255,255,255,.22)}
-.hero .intro-line{margin-top:14px;display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.16);
+.hero .intro-line{margin-top:14px;display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.26);
   border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 12px}
 .hero .intro-line .play{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--red);
   display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
