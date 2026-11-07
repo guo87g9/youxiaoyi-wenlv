@@ -1065,9 +1065,11 @@
       function pump() {
         return reader.read().then(function (res) {
           if (res.done) {
-            if (!acc) throw new Error("empty");
-            node.tn.data = acc;
-            renderMeta(node, { links: node.opts.links, mode: "实时联网 · DeepSeek-V4.1-Flash · 请自行核对来源" });
+            // 注意：这里判断的必须是已累积的正文 buf，不是解析残留 acc。
+            // 流末尾的 "\n\n" 会让 acc 变成空串，用 acc 判断会把正常回答误判成 empty。
+            if (!buf) throw new Error("empty");
+            node.tn.data = buf;
+            renderMeta(node, { links: node.opts.links, mode: "实时联网 · DeepSeek 国产大模型 · 请自行核对来源" });
             AI.failStreak = 0;
             AI.busy = false;
             scrollChat();
@@ -1127,7 +1129,7 @@
     bar.classList.remove("live", "fail");
     if (AI.mode === "live") {
       bar.classList.add("live");
-      $("modeText").textContent = "联网模式 · DeepSeek-V4.1-Flash · 检索增强";
+      $("modeText").textContent = "联网模式 · DeepSeek 国产大模型 · 检索增强";
     } else {
       $("modeText").textContent = "演示模式 · 本地知识库 " + kbTotal() + " 条";
     }
@@ -1429,6 +1431,12 @@
     });
 
     $("adminCancel").addEventListener("click", function () { $("adminSheet").classList.remove("show"); });
+
+    // 商业模式说明层
+    var bizEntry = $("bizEntry");
+    if (bizEntry) bizEntry.addEventListener("click", function () { $("bizSheet").classList.add("show"); });
+    var bizClose = $("bizClose");
+    if (bizClose) bizClose.addEventListener("click", function () { $("bizSheet").classList.remove("show"); });
     $("adminOk").addEventListener("click", function () { verifyAdmin($("adminInput").value.trim()); });
     $("adminInput").addEventListener("keydown", function (e) {
       if (e.key === "Enter") verifyAdmin($("adminInput").value.trim());

@@ -73,6 +73,12 @@
         <div class="spot-filter" id="spotFilter"></div>
         <div class="spots" id="spotGrid"></div>
         <p class="hint">客流热度为示意数据，用于演示错峰提示，不代表实时客流。</p>
+
+        <button class="biz-entry" id="bizEntry">
+          <span class="bi-ico">¥</span>
+          <span class="bi-txt"><b>这门生意怎么做</b><span>三条收入线 · 单县测算 · 复制路径</span></span>
+          <span class="bi-arrow">›</span>
+        </button>
       </section>
 
       <!-- ============ 讲解 ============ -->
@@ -206,6 +212,52 @@
       <button class="ghost" id="adminCancel">取消</button>
       <button class="primary" id="adminOk">解锁</button>
     </div>
+  </div>
+</div>
+
+<!-- 商业模式说明 -->
+<div class="sheet" id="bizSheet">
+  <div class="panel biz-panel">
+    <h3>一个人怎么靠它赚钱</h3>
+    <p class="biz-lead">OPC 模式：单人 + AI 运营一个县，边际成本趋近于零。</p>
+
+    <div class="biz-sec">
+      <h4>收入 · 三条线</h4>
+      <div class="biz-item">
+        <b>① 景区年费（主收入）</b>
+        <p>一个县按 20 个点位、<em>3000 元 / 点位 / 年</em> 计，约 <em>6 万元 / 年</em>。<br>
+        对标人工：一个景区请 2 名讲解员，一年人力 10 万起，且只能覆盖白天、只讲一个点。邮小驿覆盖 17 个点位、24 小时、断网能用。</p>
+      </div>
+      <div class="biz-item">
+        <b>② 政府购买服务</b>
+        <p>文旅局把「县域导览基础设施」当公共服务采购，同类县域项目预算区间 <em>8–15 万 / 年</em>。这部分不靠游客付费，靠公共价值。</p>
+      </div>
+      <div class="biz-item">
+        <b>③ 商户推广位</b>
+        <p>吃住行商户入驻，<em>500 元 / 月 / 家</em>；一个县 30 家约 <em>18 万元 / 年</em>。可包月也可按点击抽成，商户自己选。</p>
+      </div>
+    </div>
+
+    <div class="biz-sec">
+      <h4>成本 · 为什么一个人干得动</h4>
+      <div class="biz-cols">
+        <div><span>内容制作</span><b>一次性 2 人周</b></div>
+        <div><span>托管</span><b>年支出 &lt; 500 元</b></div>
+        <div><span>AI 调用</span><b>本地为主，基本 0</b></div>
+        <div><span>季度更新</span><b>半人日</b></div>
+      </div>
+      <p class="biz-note">整套前端是纯静态的：没有数据库、没有后端服务器、没有运维值守。这是「一个人能运营」的前提，也是敢按点位收年费的底气。</p>
+    </div>
+
+    <div class="biz-sec">
+      <h4>复制 · 从 1 个县到 N 个县</h4>
+      <p>高邮跑通 → 扬州其他县市（同属运河文化带，讲解内容可复用约 60%）→ 运河沿线城市。<br>
+      每复制一个县，增量成本主要是内容制作，技术侧不用重做。这是这类项目真正的天花板所在。</p>
+    </div>
+
+    <p class="biz-disclaimer">以上为测算模型，用于说明商业逻辑，不代表已发生的收入。本项目处于原型阶段，尚未签订商业合同。</p>
+
+    <div class="row"><button class="primary" id="bizClose">知道了</button></div>
   </div>
 </div>
 

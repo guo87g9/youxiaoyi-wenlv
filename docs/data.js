@@ -46,10 +46,10 @@ window.YXY = {
     },
     c_dangpu: {
       file: "dangpu-800.webp", spot: "高邮当铺",
-      author: "图虫摄影社区（摄影师作品）",
-      license: "商业图库作品，版权归摄影师",
-      src: "http://photo.tuchong.com/8962470/f/432372968.jpg",
-      note: "同兴当铺门楼「高郵同興當」；图虫为摄影师版权作品，商用须单独授权"
+      author: "项目方现场实拍",
+      license: "项目方提供，随作品用于大赛非商业展示",
+      src: "（项目方 2026-11-07 提供，现场实拍）",
+      note: "同兴当铺门楼「同興當鋪」与「高邮当铺」文保碑；原图 628×316，已提亮去暗、裁 4:3"
     },
     c_jingtusi: {
       file: "jingtusi-800.webp", spot: "净土寺塔",
