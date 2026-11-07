@@ -456,3 +456,12 @@ body.kb-open .tabbar{display:none}
 .biz-note{margin:0;font-size:11.5px;color:#8B8378;line-height:1.7}
 .biz-disclaimer{margin:14px 0 12px;padding:9px 11px;background:#FBF7EF;border-radius:9px;
   font-size:11px;color:#9A9186;line-height:1.65}
+
+/* 素材与版权说明（商业模式层内，与测算免责分开） */
+.credit-sec{border-top:1px solid #EFE6D2;padding-top:12px;margin-top:4px}
+.credit-sec h4{color:#8B8378}
+.credit-sec .biz-note{margin:0 0 6px}
+.credit-sec .biz-note:last-child{margin-bottom:0}
+.credit-sec em{font-style:normal;color:var(--ink);font-weight:600}
+.credit-sec code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;
+  background:#FBF7EF;padding:1px 4px;border-radius:4px;color:#6F675C}
