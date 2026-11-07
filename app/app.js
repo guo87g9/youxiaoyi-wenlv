@@ -26,9 +26,24 @@
     audio: { key: null, playing: false, failed: false }
   };
 
+  /* 代理地址推断（决定手机上能否连到 AI）
+   * - http 页面（本地演示，proxy --lan 同源托管）：直接用当前源，
+   *   手机访问 http://<电脑IP>:8787 时自动指向同一台机器，无需任何配置
+   * - file:// 打开单文件版、或 https 线上站点：回落本机 127.0.0.1:8787
+   * - config.js 里显式写了非本机地址时（如部署到内网服务器），尊重它
+   * 之前写死 127.0.0.1 的问题：手机上 127.0.0.1 是手机自己，必然连不上。
+   */
+  function defaultApiBase() {
+    var cfg = (window.YXY_CONFIG && YXY_CONFIG.api && YXY_CONFIG.api.base) || "";
+    var isLoopback = /^https?:\/\/(127\.0\.0\.1|localhost)(:|\/|$)/.test(cfg);
+    if (cfg && !isLoopback) return cfg.replace(/\/+$/, "");
+    if (location.protocol === "http:" && location.host) return location.origin;
+    return cfg || "http://127.0.0.1:8787";
+  }
+
   var AI = {
     mode: "demo",           // demo | live
-    base: LS.get("yxy.api", "http://127.0.0.1:8787"),
+    base: LS.get("yxy.api", "") || defaultApiBase(),
     token: "",
     failStreak: 0,
     busy: false
@@ -1148,22 +1163,53 @@
   function verifyAdmin(token) {
     if (!token) { toast("请输入口令"); return; }
     $("adminOk").textContent = "校验中…";
-    fetchWithTimeout(AI.base + "/health", { headers: { "x-admin-token": token } }, 6000)
-      .then(function (r) {
-        if (!r.ok) throw new Error("bad");
-        AI.token = token;
-        AI.mode = "live";
-        AI.failStreak = 0;
-        $("banner").classList.remove("show");
-        setModeUI();
-        $("adminSheet").classList.remove("show");
-        toast("已切换联网模式");
-      })
-      .catch(function () {
+
+    // 依次尝试：当前推断地址 → 同主机的 8787
+    // 后者覆盖「页面用 python -m http.server 8000 起、代理另占 8787」这种开发姿势
+    var candidates = [AI.base];
+    if (location.protocol === "http:" && location.hostname) {
+      var alt = "http://" + location.hostname + ":8787";
+      if (alt !== AI.base) candidates.push(alt);
+    }
+
+    // https 页面无法请求明文 http 的本地代理（浏览器按混合内容拦截），
+    // 直接给出人话解释，别在评面前甩一串控制台报错
+    if (location.protocol === "https:" && /^http:\/\//.test(AI.base)) {
+      AI.mode = "demo"; setModeUI();
+      toast("线上版不带联网 AI（密钥不能放前端），离线知识库照常可用；联网演示请用局域网版", 4600);
+      $("adminOk").textContent = "解锁";
+      return;
+    }
+
+    (function tryNext(i) {
+      if (i >= candidates.length) {
         AI.mode = "demo"; setModeUI();
         toast("口令不对，或代理没启动（先运行 node tools/proxy.mjs）", 3200);
-      })
-      .then(function () { $("adminOk").textContent = "解锁"; });
+        $("adminOk").textContent = "解锁";
+        return;
+      }
+      var base = candidates[i];
+      fetchWithTimeout(base + "/health", { headers: { "x-admin-token": token } }, 6000)
+        .then(function (r) {
+          if (!r.ok) throw new Error("bad");
+          return r.json();
+        })
+        .then(function (j) {
+          // 必须是代理返回的 JSON，不能是静态托管兜底返回的 index.html
+          if (!j || j.ok !== true) throw new Error("not_proxy");
+          AI.base = base;
+          LS.set("yxy.api", base);
+          AI.token = token;
+          AI.mode = "live";
+          AI.failStreak = 0;
+          $("banner").classList.remove("show");
+          setModeUI();
+          $("adminSheet").classList.remove("show");
+          toast("已切换联网模式");
+          $("adminOk").textContent = "解锁";
+        })
+        .catch(function () { tryNext(i + 1); });
+    })(0);
   }
 
   /* ================= 景区门票（暂未开放） ================= */

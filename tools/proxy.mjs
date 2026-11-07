@@ -5,9 +5,16 @@
  * 作用：前端「实时联网」模式的唯一后端。纯静态页面不能直连大模型（key 会暴露），
  *      所以由这个本地进程代持 key，并把本地知识库的检索结果作为资料喂给模型。
  *
- * 启动：
+ * 启动（本机自用）：
  *   export DEEPSEEK_API_KEY=sk-xxxx
  *   node tools/proxy.mjs
+ *
+ * 启动（现场演示 / 手机同局域网访问）：
+ *   export DEEPSEEK_API_KEY=sk-xxxx
+ *   node tools/proxy.mjs --lan
+ *   --lan 等价于 HOST=0.0.0.0 + STATIC_DIR=dist：
+ *   同一进程既托管静态页面、又提供 /ask，手机访问 http://<本机局域网IP>:8787
+ *   即为同源，不会有跨域和「https 页面调 http 接口」被拦的问题。
  *
  * 环境变量：
  *   DEEPSEEK_API_KEY  必填，DeepSeek 控制台申请
@@ -15,11 +22,14 @@
  *   DEEPSEEK_BASE     可选，默认 https://api.deepseek.com
  *   ADMIN_TOKEN       可选，设置后前端必须在 x-admin-token 头里带上同样的值
  *   PORT              可选，默认 8787
+ *   HOST              可选，默认 127.0.0.1；设 0.0.0.0 供局域网访问
+ *   STATIC_DIR        可选，静态目录（如 dist）；设置后同源托管页面
  *
  * 接口：
  *   GET  /health  → { ok, model, kb, hasKey }
  *   POST /ask     → body { q, spot, persona }，返回 SSE 流（OpenAI 兼容格式）
  *                   响应头 x-src 为 encodeURIComponent(JSON) 的来源列表
+ *   GET  /__lan   → { urls: [...] } 本机可用的局域网访问地址（演示时查地址用）
  *
  * 设计取舍：
  *   - 零依赖，只用 Node 内置模块（Node 18+ 自带 fetch）
@@ -28,16 +38,21 @@
  * ==========================================================================*/
 
 import http from "node:http";
+import os from "node:os";
 import path from "node:path";
 import vm from "node:vm";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, statSync, createReadStream } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const APP = path.join(ROOT, "app");
 
+const LAN = process.argv.includes("--lan");
 const PORT = Number(process.env.PORT || 8787);
+const HOST = process.env.HOST || (LAN ? "0.0.0.0" : "127.0.0.1");
+const STATIC_RAW = process.env.STATIC_DIR || (LAN ? path.join(ROOT, "dist") : "");
+const STATIC = STATIC_RAW ? path.resolve(ROOT, STATIC_RAW) : "";
 const KEY = process.env.DEEPSEEK_API_KEY || "";
 const MODEL = process.env.DEEPSEEK_MODEL || "deepseek-chat";
 const BASE = (process.env.DEEPSEEK_BASE || "https://api.deepseek.com").replace(/\/+$/, "");
@@ -61,6 +76,21 @@ function loadData() {
   if (!D) throw new Error("data.js 没跑出 window.YXY，检查文件是否被改坏");
   const KB = sandbox.YXY_KB || {};
   for (const k of Object.keys(KB)) D[k] = KB[k];
+
+  // kb2 / kb3 是分层补充语料，前端由 QKB.ensure 合并成一个池子。
+  // 这里必须做同样的合并，否则检索池只有 kb 的基础条目（30 条），
+  // 口语化问法几乎命中不了，AI 兜底会变成「什么都没查到，模型自由发挥」。
+  const seen = new Set();
+  const pool = [];
+  for (const key of ["kb", "kb2", "kb3"]) {
+    for (const it of Array.isArray(KB[key]) ? KB[key] : []) {
+      if (!it || !it.id || seen.has(it.id)) continue;
+      seen.add(it.id);
+      pool.push(it);
+    }
+  }
+  if (pool.length) D.kb = pool;
+
   return D;
 }
 
@@ -140,6 +170,102 @@ function json(res, code, obj) {
   res.end(body);
 }
 
+/* ---------- 静态托管（--lan 模式下与 /ask 同源，手机端零跨域） ---------- */
+const MIME = {
+  ".html": "text/html; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
+  ".mjs": "text/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".webmanifest": "application/manifest+json",
+  ".webp": "image/webp",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".mp3": "audio/mpeg",
+  ".md": "text/markdown; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
+};
+
+function serveStatic(req, res, pathname) {
+  if (!STATIC) return false;
+
+  let rel;
+  try {
+    rel = decodeURIComponent(pathname);
+  } catch {
+    json(res, 400, { error: "bad_path" });
+    return true;
+  }
+  if (rel === "/" || rel === "") rel = "/index.html";
+
+  // 目录穿越防护：解析后必须仍在 STATIC 之内
+  const full = path.resolve(STATIC, "." + rel);
+  if (full !== STATIC && !full.startsWith(STATIC + path.sep)) {
+    json(res, 403, { error: "forbidden" });
+    return true;
+  }
+
+  let st;
+  try {
+    st = statSync(full);
+    if (st.isDirectory()) {
+      const idx = path.join(full, "index.html");
+      if (existsSync(idx)) return serveStatic(req, res, rel.replace(/\/?$/, "/") + "index.html");
+      json(res, 404, { error: "not_found" });
+      return true;
+    }
+  } catch {
+    return false; // 交给调用方走 404 逻辑
+  }
+
+  const type = MIME[path.extname(full).toLowerCase()] || "application/octet-stream";
+  const headers = {
+    "content-type": type,
+    "cache-control": "no-cache", // 演示场景，改完即见，不缓存
+    "accept-ranges": "bytes",
+  };
+
+  // 简单 Range 支持：音频拖动进度需要
+  const range = req.headers.range;
+  if (range && /^bytes=\d*-\d*$/.test(range)) {
+    const [s, e] = range.replace("bytes=", "").split("-");
+    const start = s ? Number(s) : 0;
+    const end = e ? Number(e) : st.size - 1;
+    if (start >= st.size || end >= st.size || start > end) {
+      res.writeHead(416, { "content-range": `bytes */${st.size}` });
+      res.end();
+      return true;
+    }
+    res.writeHead(206, {
+      ...headers,
+      "content-range": `bytes ${start}-${end}/${st.size}`,
+      "content-length": end - start + 1,
+    });
+    createReadStream(full, { start, end }).pipe(res);
+    return true;
+  }
+
+  res.writeHead(200, { ...headers, "content-length": st.size });
+  if (req.method === "HEAD") { res.end(); return true; }
+  createReadStream(full).pipe(res);
+  return true;
+}
+
+/* ---------- 局域网地址探测（演示时用来告诉手机该访问哪个地址） ---------- */
+function lanURLs() {
+  const out = [];
+  for (const [name, list] of Object.entries(os.networkInterfaces())) {
+    for (const ni of list || []) {
+      if (ni.family !== "IPv4" || ni.internal) continue;
+      out.push({ if: name, url: `http://${ni.address}:${PORT}` });
+    }
+  }
+  return out;
+}
+
 function readBody(req, limit = 32 * 1024) {
   return new Promise((resolve, reject) => {
     let n = 0;
@@ -172,6 +298,15 @@ const server = http.createServer(async (req, res) => {
       spots: D.spots.length,
       engine: ENGINE.stats(),
     });
+  }
+
+  if (req.method === "GET" && url.pathname === "/__lan") {
+    return json(res, 200, { urls: lanURLs(), static: STATIC || null, host: HOST, port: PORT });
+  }
+
+  // 静态资源：--lan 模式下同源托管，手机访问这一个端口就够
+  if ((req.method === "GET" || req.method === "HEAD") && url.pathname !== "/ask") {
+    if (serveStatic(req, res, url.pathname)) return;
   }
 
   if (req.method !== "POST" || url.pathname !== "/ask") {
@@ -253,10 +388,27 @@ const server = http.createServer(async (req, res) => {
   res.end();
 });
 
-server.listen(PORT, "127.0.0.1", () => {
-  console.log(`邮小驿 AI 代理已启动  http://127.0.0.1:${PORT}`);
+server.listen(PORT, HOST, () => {
+  console.log(`邮小驿 AI 代理已启动  http://${HOST === "0.0.0.0" ? "127.0.0.1" : HOST}:${PORT}`);
   console.log(`  模型      ${MODEL}`);
   console.log(`  Key       ${KEY ? "已配置（" + KEY.slice(0, 6) + "…）" : "未配置，/ask 会返回 503"}`);
   console.log(`  知识库    ${(D.kb || []).length} 条 / ${D.spots.length} 个景点`);
   console.log(`  管理口令  ${ADMIN ? "已启用" : "未设置（本机演示默认不校验）"}`);
+  console.log(`  监听      ${HOST}:${PORT}${HOST === "0.0.0.0" ? "（局域网可访问）" : "（仅本机）"}`);
+  if (STATIC) console.log(`  静态目录  ${STATIC}`);
+
+  if (HOST === "0.0.0.0") {
+    const urls = lanURLs();
+    console.log(`\n  手机与这台电脑连同一个 WiFi，然后访问：`);
+    if (urls.length) {
+      for (const u of urls) console.log(`    ${u.url}    (${u.if})`);
+    } else {
+      console.log(`    没有探测到局域网地址，检查是否已连上 WiFi`);
+    }
+    if (STATIC) {
+      console.log(`\n  页面与 /ask 同源，手机上无需任何额外配置。`);
+      console.log(`  若打不开，多半是系统防火墙拦了这个端口，放行 ${PORT}/tcp 即可。`);
+    }
+    console.log("");
+  }
 });
